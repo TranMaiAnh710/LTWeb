@@ -1,0 +1,32 @@
+﻿@using BTL.Services
+@{
+    var menus = new List<BTL.Models.Menu>();
+
+    if (Session["RoleID"] != null)
+    {
+        int roleId = Convert.ToInt32(Session["RoleID"]);
+        menus = new MenuService().GetMenuByRole(roleId);
+    }
+}
+
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>CompanyOS</h2>
+        <p>Hệ thống nội bộ</p>
+    </div>
+
+    <div class="menu">
+
+        <div class="menu-title">TỔNG QUAN</div>
+
+        @foreach (var m in menus)
+        {
+            <a href="/@m.MenuLink" class="menu-item">
+                <span>@m.MenuName</span>
+            </a>
+        }
+
+    </div>
+
+</div>

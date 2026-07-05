@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChamCong">
+          <Key>
+            <PropertyRef Name="MaChamCong" />
+          </Key>
+          <Property Name="MaChamCong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ngay" Type="date" Nullable="false" />
+          <Property Name="ThoiGianVao" Type="datetime" Nullable="false" />
+          <Property Name="ThoiGianRa" Type="datetime" Nullable="false" />
+          <Property Name="SoGioLam" Type="time" Precision="7" />
+          <Property Name="GioDiMuon" Type="time" Precision="7" />
+          <Property Name="GioVeSom" Type="time" Precision="7" />
+          <Property Name="GioTangCa" Type="time" Precision="7" />
+          <Property Name="TrangThai" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCV" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PhuCapCV" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="MenuLink" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MenuOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotenNV" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" Nullable="false" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SĐT" Type="int" Nullable="false" />
+          <Property Name="LuongCBan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="MaCV" Type="int" Nullable="false" />
+          <Property Name="MaPB" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NhatKyLuong">
+          <Key>
+            <PropertyRef Name="IDNhatKy" />
+          </Key>
+          <Property Name="IDNhatKy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="LuongCBan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NgayApDung" Type="date" Nullable="false" />
+          <Property Name="GhiChu" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="PhieuLuong">
+          <Key>
+            <PropertyRef Name="MaBL" />
+          </Key>
+          <Property Name="MaBL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="IDNhatKy" Type="int" Nullable="false" />
+          <Property Name="Thang" Type="int" Nullable="false" />
+          <Property Name="Nam" Type="int" Nullable="false" />
+          <Property Name="LuongCBan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Luong1NgayCong" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HeSoTangCa" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Luong1hTangCa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Thuong" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Phat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SoNgayCong" Type="int" Nullable="false" />
+          <Property Name="SoGioTangCa" Type="float" />
+          <Property Name="BHYT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BHXH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Thue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TongLuong" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="TrangThai" Type="bit" />
+          <Property Name="MaChamCong" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhongBan">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPB" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="RMID" />
+          </Key>
+          <Property Name="RMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Account__MaNV__31B762FC">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__RoleID__30C33EC3">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChamCong__MaNV__3587F3E0">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChamCong" Type="Self.ChamCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="ChamCong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaCV__29221CFB">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaPB__2A164134">
+          <End Role="PhongBan" Type="Self.PhongBan" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongBan">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhatKyLuon__MaNV__395884C4">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NhatKyLuong" Type="Self.NhatKyLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="NhatKyLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhieuLuon__IDNha__45BE5BA9">
+          <End Role="NhatKyLuong" Type="Self.NhatKyLuong" Multiplicity="1" />
+          <End Role="PhieuLuong" Type="Self.PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhatKyLuong">
+              <PropertyRef Name="IDNhatKy" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="IDNhatKy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhieuLuong__MaNV__44CA3770">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="PhieuLuong" Type="Self.PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Role_Menu__MenuI__1DB06A4F">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Role_Menu__RoleI__1CBC4616">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_chamcong">
+          <End Role="ChamCong" Type="Self.ChamCong" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PhieuLuong" Type="Self.PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChamCong">
+              <PropertyRef Name="MaChamCong" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="MaChamCong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataWebModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChamCong" EntityType="Self.ChamCong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhatKyLuong" EntityType="Self.NhatKyLuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhieuLuong" EntityType="Self.PhieuLuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhongBan" EntityType="Self.PhongBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__MaNV__31B762FC" Association="Self.FK__Account__MaNV__31B762FC">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__RoleID__30C33EC3" Association="Self.FK__Account__RoleID__30C33EC3">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChamCong__MaNV__3587F3E0" Association="Self.FK__ChamCong__MaNV__3587F3E0">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="ChamCong" EntitySet="ChamCong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaCV__29221CFB" Association="Self.FK__NhanVien__MaCV__29221CFB">
+            <End Role="ChucVu" EntitySet="ChucVu" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaPB__2A164134" Association="Self.FK__NhanVien__MaPB__2A164134">
+            <End Role="PhongBan" EntitySet="PhongBan" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhatKyLuon__MaNV__395884C4" Association="Self.FK__NhatKyLuon__MaNV__395884C4">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="NhatKyLuong" EntitySet="NhatKyLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhieuLuon__IDNha__45BE5BA9" Association="Self.FK__PhieuLuon__IDNha__45BE5BA9">
+            <End Role="NhatKyLuong" EntitySet="NhatKyLuong" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhieuLuong__MaNV__44CA3770" Association="Self.FK__PhieuLuong__MaNV__44CA3770">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Role_Menu__MenuI__1DB06A4F" Association="Self.FK__Role_Menu__MenuI__1DB06A4F">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Role_Menu__RoleI__1CBC4616" Association="Self.FK__Role_Menu__RoleI__1CBC4616">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_chamcong" Association="Self.fk_chamcong">
+            <End Role="ChamCong" EntitySet="ChamCong" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuong" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__Account__MaNV__31B762FC" FromRole="Account" ToRole="NhanVien" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Account__RoleID__30C33EC3" FromRole="Account" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="ChamCong">
+          <Key>
+            <PropertyRef Name="MaChamCong" />
+          </Key>
+          <Property Name="MaChamCong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ThoiGianVao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ThoiGianRa" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__ChamCong__MaNV__3587F3E0" FromRole="ChamCong" ToRole="NhanVien" />
+          <Property Name="SoGioLam" Type="Time" Precision="7" />
+          <Property Name="GioDiMuon" Type="Time" Precision="7" />
+          <Property Name="GioVeSom" Type="Time" Precision="7" />
+          <Property Name="GioTangCa" Type="Time" Precision="7" />
+          <Property Name="TrangThai" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhieuLuongs" Relationship="DataWebModel.fk_chamcong" FromRole="ChamCong" ToRole="PhieuLuong" />
+        </EntityType>
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCV" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhuCapCV" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__MaCV__29221CFB" FromRole="ChucVu" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MenuLink" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MenuOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role_Menu" Relationship="Self.FK__Role_Menu__MenuI__1DB06A4F" FromRole="Menu" ToRole="Role_Menu" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotenNV" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SĐT" Type="Int32" Nullable="false" />
+          <Property Name="LuongCBan" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="MaCV" Type="Int32" Nullable="false" />
+          <Property Name="MaPB" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__MaNV__31B762FC" FromRole="NhanVien" ToRole="Account" />
+          <NavigationProperty Name="ChamCongs" Relationship="Self.FK__ChamCong__MaNV__3587F3E0" FromRole="NhanVien" ToRole="ChamCong" />
+          <NavigationProperty Name="ChucVu" Relationship="Self.FK__NhanVien__MaCV__29221CFB" FromRole="NhanVien" ToRole="ChucVu" />
+          <NavigationProperty Name="PhongBan" Relationship="Self.FK__NhanVien__MaPB__2A164134" FromRole="NhanVien" ToRole="PhongBan" />
+          <NavigationProperty Name="PhieuLuongs" Relationship="DataWebModel.FK__PhieuLuong__MaNV__44CA3770" FromRole="NhanVien" ToRole="PhieuLuong" />
+          <NavigationProperty Name="NhatKyLuongs" Relationship="DataWebModel.FK__NhatKyLuon__MaNV__395884C4" FromRole="NhanVien" ToRole="NhatKyLuong" />
+        </EntityType>
+        <EntityType Name="PhongBan">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPB" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__MaPB__2A164134" FromRole="PhongBan" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__RoleID__30C33EC3" FromRole="Role" ToRole="Account" />
+          <NavigationProperty Name="Role_Menu" Relationship="Self.FK__Role_Menu__RoleI__1CBC4616" FromRole="Role" ToRole="Role_Menu" />
+        </EntityType>
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="RMID" />
+          </Key>
+          <Property Name="RMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Role_Menu__MenuI__1DB06A4F" FromRole="Role_Menu" ToRole="Menu" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Role_Menu__RoleI__1CBC4616" FromRole="Role_Menu" ToRole="Role" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__Account__MaNV__31B762FC">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account__RoleID__30C33EC3">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChamCong__MaNV__3587F3E0">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChamCong" Type="Self.ChamCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="ChamCong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaCV__29221CFB">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Role_Menu__MenuI__1DB06A4F">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaPB__2A164134">
+          <End Role="PhongBan" Type="Self.PhongBan" Multiplicity="1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongBan">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Role_Menu__RoleI__1CBC4616">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="ChamCongs" EntityType="Self.ChamCong" />
+          <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="PhongBans" EntityType="Self.PhongBan" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" />
+          <AssociationSet Name="FK__Account__MaNV__31B762FC" Association="Self.FK__Account__MaNV__31B762FC">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account__RoleID__30C33EC3" Association="Self.FK__Account__RoleID__30C33EC3">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChamCong__MaNV__3587F3E0" Association="Self.FK__ChamCong__MaNV__3587F3E0">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="ChamCong" EntitySet="ChamCongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaCV__29221CFB" Association="Self.FK__NhanVien__MaCV__29221CFB">
+            <End Role="ChucVu" EntitySet="ChucVus" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Role_Menu__MenuI__1DB06A4F" Association="Self.FK__Role_Menu__MenuI__1DB06A4F">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaPB__2A164134" Association="Self.FK__NhanVien__MaPB__2A164134">
+            <End Role="PhongBan" EntitySet="PhongBans" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Role_Menu__RoleI__1CBC4616" Association="Self.FK__Role_Menu__RoleI__1CBC4616">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <EntitySet Name="PhieuLuongs" EntityType="DataWebModel.PhieuLuong" />
+          <AssociationSet Name="fk_chamcong" Association="DataWebModel.fk_chamcong">
+            <End Role="ChamCong" EntitySet="ChamCongs" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhieuLuong__MaNV__44CA3770" Association="DataWebModel.FK__PhieuLuong__MaNV__44CA3770">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuongs" />
+          </AssociationSet>
+          <EntitySet Name="NhatKyLuongs" EntityType="DataWebModel.NhatKyLuong" />
+          <AssociationSet Name="FK__NhatKyLuon__MaNV__395884C4" Association="DataWebModel.FK__NhatKyLuon__MaNV__395884C4">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="NhatKyLuong" EntitySet="NhatKyLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhieuLuon__IDNha__45BE5BA9" Association="DataWebModel.FK__PhieuLuon__IDNha__45BE5BA9">
+            <End Role="NhatKyLuong" EntitySet="NhatKyLuongs" />
+            <End Role="PhieuLuong" EntitySet="PhieuLuongs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PhieuLuong">
+          <Key>
+            <PropertyRef Name="MaBL" />
+          </Key>
+          <Property Name="MaBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="IDNhatKy" Type="Int32" Nullable="false" />
+          <Property Name="Thang" Type="Int32" Nullable="false" />
+          <Property Name="Nam" Type="Int32" Nullable="false" />
+          <Property Name="LuongCBan" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Luong1NgayCong" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="HeSoTangCa" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Luong1hTangCa" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Thuong" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Phat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SoNgayCong" Type="Int32" Nullable="false" />
+          <Property Name="SoGioTangCa" Type="Double" />
+          <Property Name="BHYT" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="BHXH" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Thue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TongLuong" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="MaChamCong" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChamCong" Relationship="DataWebModel.fk_chamcong" FromRole="PhieuLuong" ToRole="ChamCong" />
+          <NavigationProperty Name="NhanVien" Relationship="DataWebModel.FK__PhieuLuong__MaNV__44CA3770" FromRole="PhieuLuong" ToRole="NhanVien" />
+          <NavigationProperty Name="NhatKyLuong" Relationship="DataWebModel.FK__PhieuLuon__IDNha__45BE5BA9" FromRole="PhieuLuong" ToRole="NhatKyLuong" />
+        </EntityType>
+        <Association Name="fk_chamcong">
+          <End Type="DataWebModel.ChamCong" Role="ChamCong" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DataWebModel.PhieuLuong" Role="PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChamCong">
+              <PropertyRef Name="MaChamCong" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="MaChamCong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhieuLuong__MaNV__44CA3770">
+          <End Type="DataWebModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+          <End Type="DataWebModel.PhieuLuong" Role="PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NhatKyLuong">
+          <Key>
+            <PropertyRef Name="IDNhatKy" />
+          </Key>
+          <Property Name="IDNhatKy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="LuongCBan" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NgayApDung" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NhanVien" Relationship="DataWebModel.FK__NhatKyLuon__MaNV__395884C4" FromRole="NhatKyLuong" ToRole="NhanVien" />
+          <NavigationProperty Name="PhieuLuongs" Relationship="DataWebModel.FK__PhieuLuon__IDNha__45BE5BA9" FromRole="NhatKyLuong" ToRole="PhieuLuong" />
+        </EntityType>
+        <Association Name="FK__NhatKyLuon__MaNV__395884C4">
+          <End Type="DataWebModel.NhanVien" Role="NhanVien" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DataWebModel.NhatKyLuong" Role="NhatKyLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="NhatKyLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhieuLuon__IDNha__45BE5BA9">
+          <End Type="DataWebModel.NhatKyLuong" Role="NhatKyLuong" Multiplicity="1" />
+          <End Type="DataWebModel.PhieuLuong" Role="PhieuLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhatKyLuong">
+              <PropertyRef Name="IDNhatKy" />
+            </Principal>
+            <Dependent Role="PhieuLuong">
+              <PropertyRef Name="IDNhatKy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataWebModelStoreContainer" CdmEntityContainer="DataWebEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DataWebModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChamCongs">
+            <EntityTypeMapping TypeName="DataWebModel.ChamCong">
+              <MappingFragment StoreEntitySet="ChamCong">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GioTangCa" ColumnName="GioTangCa" />
+                <ScalarProperty Name="GioVeSom" ColumnName="GioVeSom" />
+                <ScalarProperty Name="GioDiMuon" ColumnName="GioDiMuon" />
+                <ScalarProperty Name="SoGioLam" ColumnName="SoGioLam" />
+                <ScalarProperty Name="MaChamCong" ColumnName="MaChamCong" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="ThoiGianVao" ColumnName="ThoiGianVao" />
+                <ScalarProperty Name="ThoiGianRa" ColumnName="ThoiGianRa" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChucVus">
+            <EntityTypeMapping TypeName="DataWebModel.ChucVu">
+              <MappingFragment StoreEntitySet="ChucVu">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+                <ScalarProperty Name="PhuCapCV" ColumnName="PhuCapCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="DataWebModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
+                <ScalarProperty Name="MenuOrder" ColumnName="MenuOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="DataWebModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HotenNV" ColumnName="HotenNV" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="SĐT" ColumnName="SĐT" />
+                <ScalarProperty Name="LuongCBan" ColumnName="LuongCBan" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhongBans">
+            <EntityTypeMapping TypeName="DataWebModel.PhongBan">
+              <MappingFragment StoreEntitySet="PhongBan">
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DataWebModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Menu">
+            <EntityTypeMapping TypeName="DataWebModel.Role_Menu">
+              <MappingFragment StoreEntitySet="Role_Menu">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RMID" ColumnName="RMID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhieuLuongs">
+            <EntityTypeMapping TypeName="DataWebModel.PhieuLuong">
+              <MappingFragment StoreEntitySet="PhieuLuong">
+                <ScalarProperty Name="MaChamCong" ColumnName="MaChamCong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+                <ScalarProperty Name="Thue" ColumnName="Thue" />
+                <ScalarProperty Name="BHXH" ColumnName="BHXH" />
+                <ScalarProperty Name="BHYT" ColumnName="BHYT" />
+                <ScalarProperty Name="SoGioTangCa" ColumnName="SoGioTangCa" />
+                <ScalarProperty Name="SoNgayCong" ColumnName="SoNgayCong" />
+                <ScalarProperty Name="Phat" ColumnName="Phat" />
+                <ScalarProperty Name="Thuong" ColumnName="Thuong" />
+                <ScalarProperty Name="Luong1hTangCa" ColumnName="Luong1hTangCa" />
+                <ScalarProperty Name="HeSoTangCa" ColumnName="HeSoTangCa" />
+                <ScalarProperty Name="Luong1NgayCong" ColumnName="Luong1NgayCong" />
+                <ScalarProperty Name="LuongCBan" ColumnName="LuongCBan" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="IDNhatKy" ColumnName="IDNhatKy" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhatKyLuongs">
+            <EntityTypeMapping TypeName="DataWebModel.NhatKyLuong">
+              <MappingFragment StoreEntitySet="NhatKyLuong">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayApDung" ColumnName="NgayApDung" />
+                <ScalarProperty Name="LuongCBan" ColumnName="LuongCBan" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="IDNhatKy" ColumnName="IDNhatKy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

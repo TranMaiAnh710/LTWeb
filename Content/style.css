@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f6f9;
+}
+
+.app {
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: #1e2a3a;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+.logo h2 {
+    margin: 0;
+}
+
+.menu-title {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.menu-item {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    background: #2f3e55;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+}
+
+/* TOPBAR */
+.topbar {
+    background: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* CONTENT */
+.content {
+    padding: 20px;
+}
+
+/* CARD */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.card.warning {
+    border-left: 5px solid red;
+}

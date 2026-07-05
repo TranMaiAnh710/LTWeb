@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>CompanyOS</title>
+
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/dashboard.css" />
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        @Html.Partial("_Sidebar")
+
+        <div class="main">
+
+            <!-- TOPBAR -->
+            @Html.Partial("_Topbar")
+
+            <!-- CONTENT -->
+            <div class="content">
+                @RenderBody()
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

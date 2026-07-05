@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: #2C4963;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 100px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box shadow">
+        <div class="text-center mb-4">
+            <div class="bg-dark text-white rounded p-2 d-inline-block">C</div>
+            <h4 class="mt-2">CompanyOS</h4>
+            <small class="text-muted">Nền tảng quản lý nhân sự nội bộ</small>
+        </div>
+
+        <form method="post" action="/Login/Login">
+            <div class="mb-3">
+                <label class="form-label">Tên đăng nhập</label>
+                <input name="username" class="form-control" placeholder="UserName" />
+            </div>
+
+            <div class="mb-3 position-relative">
+                <label class="form-label">Mật khẩu</label>
+                <input id="password" type="password" name="password" class="form-control" placeholder="Password"/>
+                <button type="button" onclick="togglePassword()"
+                        style="position:absolute; right:10px; top:35px; border:none; background:none;">
+                    👁
+                </button>
+            </div>
+
+            <button class="btn btn-dark w-100">Đăng nhập</button>
+
+            <div class="d-flex justify-content-between mt-3">
+                <a href="href="/Login/ResetPassword">Quên mật khẩu?</a>
+                <a href="#">Tạo tài khoản</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    function togglePassword() {
+        var input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
+    }
+    </script>
+
+</body>
+</html>

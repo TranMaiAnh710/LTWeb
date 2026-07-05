@@ -1,0 +1,140 @@
+﻿@model BTL.Models.NhanVien
+
+<div class="modal-header border-0 pb-0">
+    <h5 class="fw-semibold">
+        NhanVien – MaNV: @Model.MaNV
+    </h5>
+    <button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body p-0">
+
+    <!-- HEADER -->
+    <div class="p-4 border-bottom">
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- AVATAR -->
+            <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                 style="width:60px;height:60px;
+                        background: linear-gradient(135deg,#7c3aed,#9333ea);
+                        font-weight:600;font-size:18px;">
+                @(Model.HotenNV.Substring(0,1).ToUpper())
+            </div>
+
+            <!-- INFO -->
+            <div>
+                <div class="fw-semibold fs-5">@Model.HotenNV</div>
+
+                <div class="text-muted small">
+                    MãCV:@(Model.ChucVu?.MaCV ?? 0) – @(Model.ChucVu?.TenCV ?? "--")
+                    •
+                    MãPB:@(Model.PhongBan?.MaPB ?? 0) – @(Model.PhongBan?.TenPB ?? "--")
+                </div>
+
+                <div class="text-success small mt-1 fw-semibold">
+                    ● @(Model.TrangThai == true ? "Hoạt động" : "Ngừng")
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="p-4">
+
+        <div class="row">
+
+            <!-- LEFT -->
+            <div class="col-md-6">
+
+                <div class="mb-3">
+                    <div class="text-muted small">MaNV (PK)</div>
+                    <div>@Model.MaNV</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">NgaySinh</div>
+                    <div>@Model.NgaySinh.ToString("yyyy-MM-dd")</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">SDT</div>
+                    <div>@Model.SĐT</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">MaCV → ChucVu</div>
+                    <div>
+                        @(Model.ChucVu?.MaCV ?? 0) – @(Model.ChucVu?.TenCV ?? "--")
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">TrangThai</div>
+                    <div>
+                        @(Model.TrangThai == true ? "True (đang làm)" : "False (nghỉ)")
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">UpdatedAt</div>
+                    <div>@(Model.UpdatedAt?.ToString("yyyy-MM-dd") ?? "--")</div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="col-md-6">
+
+                <div class="mb-3">
+                    <div class="text-muted small">HotenNV</div>
+                    <div>@Model.HotenNV</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">GioiTinh</div>
+                    <div>@Model.GioiTinh</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">LuongCBan</div>
+                    <div>@String.Format("{0:N0} đ", Model.LuongCBan)</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">MaPB → PhongBan</div>
+                    <div>
+                        @(Model.PhongBan?.MaPB ?? 0) – @(Model.PhongBan?.TenPB ?? "--")
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">CreatedAt</div>
+                    <div>@Model.CreatedAt.ToString("yyyy-MM-dd")</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-muted small">Account.UserName</div>
+                    <div>
+                        @(Model.Accounts.FirstOrDefault()?.UserName ?? "--")
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer border-0 pt-0">
+    <button class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+        Đóng
+    </button>
+
+    <button class="btn btn-dark px-4">
+        Chỉnh sửa
+    </button>
+</div>

@@ -1,0 +1,265 @@
+﻿@model IEnumerable<BTL.Models.ChamCong>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Chấm Công</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background: #f3f4f6;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #0f172a;
+            color: #cbd5f5;
+            height: 100vh;
+            padding: 20px 16px;
+            position: relative;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            margin-top: 20px;
+            color: #64748b;
+        }
+
+        .menu-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+            .menu-item:hover {
+                background: #1e293b;
+            }
+
+            .menu-item.active {
+                background: #2563eb;
+                color: white;
+            }
+
+        /* MAIN */
+        .main {
+            flex-grow: 1;
+        }
+
+        .header {
+            background: white;
+            padding: 14px 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        /* CARD */
+        .card-box {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+            .search-box input {
+                border: none;
+                outline: none;
+                margin-left: 5px;
+            }
+
+        /* TABLE */
+        .table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .salary {
+            color: #16a34a;
+            font-weight: 500;
+        }
+
+        /* USER */
+        .sidebar-user {
+            position: absolute;
+            bottom: 20px;
+            left: 16px;
+            right: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo">🏢 CompanyOS</div>
+
+            <div class="menu-title">TỔNG QUAN</div>
+            <a href="@Url.Action("Index","Dashboard", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">📊 Dashboard</a>
+
+            <div class="menu-title">QUẢN LÝ</div>
+            <a href="@Url.Action("Index","Account", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">👤 Tài khoản</a>
+            <a class="menu-item active">⏱ Chấm công</a>
+            <a href="@Url.Action("Index","Employee", new { area = "NhanSu" })" class="menu-item text-decoration-none text-light">📄 Nhân sự</a>
+
+            <div class="menu-title">TÀI CHÍNH</div>
+            <a href="@Url.Action("Index","Payroll", new { area = "KeToan" })" class="menu-item text-decoration-none text-light">💰 Bảng lương</a>
+            <a href="@Url.Action("Index","PayrollDetail", new { area = "KeToan" })" class="menu-item text-decoration-none text-light">📘 Nhật ký</a>
+
+            <div class="menu-title">HỆ THỐNG</div>
+            <a href="@Url.Action("Index","Menu", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">⚙ Cấu hình</a>
+            <div class="sidebar-user">
+                <div class="d-flex align-items-center gap-2">
+
+                    <!-- Avatar -->
+                    <div class="avatar bg-blue">
+                        @(ViewBag.HotenNV != null ? ViewBag.HotenNV.Substring(0,1) : "")
+                    </div>
+
+                    <!-- Info -->
+                    <div>
+                        <div class="text-white fw-semibold">@ViewBag.HotenNV</div>
+                        <small class="text-secondary">@ViewBag.TenCV</small>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <a href="@Url.Action("Logout","Account")"
+                   class="d-block mt-2 text-decoration-none text-light">
+                    ← Đăng xuất
+                </a>
+            </div>
+        </div>
+        <!-- MAIN -->
+        <div class="flex-grow-1">
+
+            <!-- HEADER -->
+            <div class="header">
+                <b>Chấm công</b>
+            </div>
+
+            <div class="p-4">
+
+                <div class="card-box">
+
+                    <!-- FILTER -->
+                    <div class="d-flex gap-2 mb-3">
+                        <input type="date" class="form-control w-auto" />
+                        <select class="form-select w-auto">
+                            <option>Tất cả phòng ban</option>
+                        </select>
+                        <button class="btn btn-dark">Xuất Excel</button>
+                    </div>
+
+                    <!-- TABLE -->
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nhân viên</th>
+                                <th>Ngày</th>
+                                <th>Vào</th>
+                                <th>Ra</th>
+                                <th>Trạng thái</th>
+                                <th>Phòng ban</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{
+                                int i = 1;
+                            }
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>#@i</td>
+
+                                    <!-- NHÂN VIÊN -->
+                                    <td>
+                                        <strong>@(item.NhanVien?.HotenNV ?? "N/A")</strong><br />
+                                        <small>@(item.NhanVien != null ? item.NhanVien.MaNV.ToString() : "--")</small>
+                                    </td>
+
+                                    <!-- NGÀY -->
+                                    <td>@item.Ngay.ToString("yyyy-MM-dd")</td>
+
+                                    <!-- GIỜ -->
+                                    <td>@item.ThoiGianVao.ToString("HH:mm")</td>
+                                    <td>@item.ThoiGianRa.ToString("HH:mm")</td>
+
+                                    <!-- TRẠNG THÁI -->
+                                    <td>
+                                        @if (item.TrangThai == "Đi làm")
+                                        {
+                                            <span class="pill pill-green">Đi làm</span>
+                                        }
+                                        else if (item.TrangThai == "Vắng mặt")
+                                        {
+                                            <span class="pill pill-red">Vắng</span>
+                                        }
+                                        else if (item.TrangThai == "Đang làm")
+                                        {
+                                            <span class="pill pill-blue">Đang làm</span>
+                                        }
+                                        else if (item.TrangThai == "Muộn")
+                                        {
+                                            <span class="pill pill-yellow">Muộn</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="pill pill-blue">@item.TrangThai</span>
+                                        }
+                                    </td>
+
+                                    <!-- PHÒNG BAN -->
+                                    <td>
+                                        @(item.NhanVien != null && item.NhanVien.PhongBan != null
+                                        ? item.NhanVien.PhongBan.TenPB
+                                        : "--")
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d92ea8dba2194a81ac5348a8cbb5b986" Name="Diagram1">
+        <EntityTypeShape EntityType="DataWebModel.Account" Width="1.5" PointX="6.125" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.ChamCong" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.ChucVu" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.Menu" Width="1.5" PointX="2.625" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.NhanVien" Width="1.5" PointX="3.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.PhongBan" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.Role" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWebModel.Role_Menu" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DataWebModel.FK__Account__MaNV__31B762FC" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__Account__RoleID__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__ChamCong__MaNV__3587F3E0" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__NhanVien__MaCV__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__Role_Menu__MenuI__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__NhanVien__MaPB__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWebModel.FK__Role_Menu__RoleI__1CBC4616" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DataWebModel.PhieuLuong" Width="1.5" PointX="7.5" PointY="7.5" />
+        <AssociationConnector Association="DataWebModel.fk_chamcong" />
+        <AssociationConnector Association="DataWebModel.FK__PhieuLuong__MaNV__44CA3770" />
+        <EntityTypeShape EntityType="DataWebModel.NhatKyLuong" Width="1.5" PointX="5.25" PointY="13" />
+        <AssociationConnector Association="DataWebModel.FK__NhatKyLuon__MaNV__395884C4" />
+        <AssociationConnector Association="DataWebModel.FK__PhieuLuon__IDNha__45BE5BA9" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

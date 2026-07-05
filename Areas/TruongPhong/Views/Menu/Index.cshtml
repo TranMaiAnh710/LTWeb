@@ -1,0 +1,469 @@
+﻿@model BTL.Models.RoleMenuVM
+
+@{
+    ViewBag.Title = "Cấu hình menu";
+
+    var roles = Model.Roles;
+    var menus = Model.Menus;
+    var roleMenus = Model.RoleMenus;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Cấu hình menu</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f4f6;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: #0f172a;
+            color: #cbd5f5;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
+        .menu-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: .2s;
+        }
+
+            .menu-item:hover {
+                background: #1e293b;
+            }
+
+            .menu-item.active {
+                background: #2563eb;
+                color: white;
+            }
+
+        .sidebar-user {
+            margin-top: auto;
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        .header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 24px;
+        }
+
+        /* CARD */
+        .card-box {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        /* TOGGLE */
+        .toggle-btn {
+            width: 48px;
+            height: 26px;
+            border-radius: 30px;
+            border: none;
+            background: #d1d5db;
+            position: relative;
+            transition: .3s;
+        }
+
+            .toggle-btn span {
+                width: 20px;
+                height: 20px;
+                background: white;
+                border-radius: 50%;
+                position: absolute;
+                top: 3px;
+                left: 4px;
+                transition: .3s;
+            }
+
+            .toggle-btn.active {
+                background: #2563eb;
+            }
+
+                .toggle-btn.active span {
+                    left: 24px;
+                }
+
+        .menu-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .table thead {
+            background: #f9fafb;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+                🏢 CompanyOS
+            </div>
+
+            <div class="menu-title">
+                TỔNG QUAN
+            </div>
+
+            <a href="@Url.Action("Index","Dashboard", new { area = "TruongPhong" })"
+               class="menu-item text-decoration-none text-light">
+                📊 Dashboard
+            </a>
+
+            <div class="menu-title">
+                QUẢN LÝ
+            </div>
+
+            <a href="@Url.Action("Index","Account", new { area = "TruongPhong" })"
+               class="menu-item text-decoration-none text-light">
+                👤 Tài khoản
+            </a>
+
+            <a href="@Url.Action("Index","ChamCong", new { area = "NhanSu" })"
+               class="menu-item text-decoration-none text-light">
+                ⏱ Chấm công
+            </a>
+
+            <a href="@Url.Action("Index","Employee", new { area = "NhanSu" })"
+               class="menu-item text-decoration-none text-light">
+                📄 Nhân sự
+            </a>
+
+            <div class="menu-title">
+                TÀI CHÍNH
+            </div>
+
+            <a href="@Url.Action("Index","Payroll", new { area = "KeToan" })"
+               class="menu-item text-decoration-none text-light">
+                💰 Bảng lương
+            </a>
+
+            <a href="@Url.Action("Index","PayrollDetail", new { area = "KeToan" })"
+               class="menu-item text-decoration-none text-light">
+                📘 Nhật ký
+            </a>
+
+            <div class="menu-title">
+                HỆ THỐNG
+            </div>
+
+            <div class="menu-item active">
+                ⚙ Cấu hình
+            </div>
+
+            <!-- USER -->
+            <div class="sidebar-user">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="avatar">
+                        @(ViewBag.HotenNV != null
+                            ? ViewBag.HotenNV.Substring(0,1)
+                            : "")
+                    </div>
+
+                    <div>
+                        <div class="text-white fw-semibold">
+                            @ViewBag.HotenNV
+                        </div>
+
+                        <small class="text-secondary">
+                            @ViewBag.TenCV
+                        </small>
+                    </div>
+
+                </div>
+
+                <a href="@Url.Action("Logout","Menu",new { area = "TruongPhong" })")"
+                   class="d-block mt-2 text-decoration-none text-light">
+
+                    ← Đăng xuất
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- HEADER -->
+            <div class="header">
+
+                <span class="text-primary fw-semibold small">
+                    KHU A - TRƯỞNG PHÒNG
+                </span>
+
+                <h4 class="fw-bold mt-1 mb-0">
+                    Cấu hình Role_Menu
+                </h4>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <!-- INFO -->
+                <div class="alert border-start border-4 border-primary bg-primary-subtle d-flex align-items-start gap-3 mb-4">
+
+                    <div style="font-size:20px;">
+                        ℹ
+                    </div>
+
+                    <div class="small text-primary-emphasis">
+
+                        Bảng <b>Role_Menu</b> kiểm soát quyền hiển thị menu theo từng vai trò người dùng.
+
+                    </div>
+
+                </div>
+
+                <!-- TABLE -->
+                <div class="card-box">
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle mb-0">
+
+                            <thead>
+
+                                <tr class="text-uppercase small text-secondary">
+
+                                    <th class="ps-4">
+                                        MENU
+                                    </th>
+
+                                    @foreach (var r in roles)
+                                    {
+                                        <th class="text-center">
+                                            @r.RoleName
+                                        </th>
+                                    }
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var menu in menus)
+                                {
+                                    <tr>
+
+                                        <!-- MENU -->
+                                        <td class="ps-4">
+
+                                            <div class="d-flex align-items-center gap-3">
+
+                                                <div class="menu-icon-box">
+                                                    📂
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="fw-semibold text-dark">
+                                                        @menu.MenuName
+                                                    </div>
+
+                                                    <div class="small text-muted">
+                                                        MenuID: @menu.MenuID
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <!-- ROLES -->
+                                        @foreach (var r in roles)
+                                        {
+                                            var rm = roleMenus.FirstOrDefault(x =>
+                                                x.MenuID == menu.MenuID &&
+                                                x.RoleID == r.RoleID);
+
+                                            bool active = rm != null && rm.IsVisible;
+
+                                            <td class="text-center">
+
+                                                <button type="button"
+                                                        class="toggle-btn @(active ? "active" : "")"
+                                                        data-menu="@menu.MenuID"
+                                                        data-role="@r.RoleID">
+
+                                                    <span></span>
+
+                                                </button>
+
+                                            </td>
+                                        }
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="px-4 py-3 bg-light border-top small text-muted">
+
+                        IsVisible = true → Hiển thị menu |
+                        IsVisible = false → Ẩn menu
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+    document.querySelectorAll(".toggle-btn").forEach(btn => {
+
+        btn.addEventListener("click", function () {
+
+            let button = this;
+
+            button.classList.toggle("active");
+
+            let menuId = parseInt(button.dataset.menu);
+            let roleId = parseInt(button.dataset.role);
+            let isVisible = button.classList.contains("active");
+
+            fetch('@Url.Action("ToggleRoleMenu", "Menu", new { area = "TruongPhong" })', {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    menuId: menuId,
+                    roleId: roleId,
+                    isVisible: isVisible
+                })
+
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                console.log(data);
+
+                if (!data.success) {
+
+                    alert("Cập nhật thất bại");
+
+                }
+
+            })
+
+            .catch(error => {
+
+                console.log(error);
+
+                alert("Có lỗi xảy ra");
+
+            });
+
+        });
+
+    });
+
+    </script>
+
+</body>
+</html>

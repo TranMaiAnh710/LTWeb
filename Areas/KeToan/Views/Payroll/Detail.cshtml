@@ -1,0 +1,342 @@
+﻿@model BTL.Models.PhieuLuong
+
+@{
+    Layout = null;
+
+    decimal tangCa =
+        (decimal)((Model.SoGioTangCa ?? 0) * (double)Model.Luong1hTangCa);
+}
+
+<style>
+    .modal-dialog {
+        max-width: 700px;
+    }
+
+    .salary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 13px;
+    }
+
+    .salary-label {
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .salary-value {
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .salary-plus {
+        color: #16a34a;
+        font-weight: 700;
+    }
+
+    .salary-minus {
+        color: #dc2626;
+        font-weight: 700;
+    }
+
+    .total-box {
+        border-top: 2px dashed #d1d5db;
+        margin-top: 14px;
+        padding-top: 18px;
+    }
+
+    .status-paid {
+        background: #dcfce7;
+        color: #166534;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 999px;
+    }
+
+    .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 999px;
+    }
+</style>
+
+<div class="modal-content border-0 rounded-4 overflow-hidden shadow-lg">
+
+    <!-- HEADER -->
+    <div class="modal-header px-4 py-3 border-bottom">
+
+        <h5 class="fw-bold mb-0">
+            Phiếu Lương – MaBL: @Model.MaBL
+        </h5>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="modal">
+        </button>
+
+    </div>
+
+    <!-- BODY -->
+    <div class="modal-body p-3 bg-light">
+
+        <!-- PAYSLIP -->
+        <div class="bg-white border rounded-4 overflow-hidden">
+
+            <!-- TOP -->
+            <div class="text-white p-4"
+                 style="background:#07122b;">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <!-- LEFT -->
+                    <div>
+
+                        <div class="fw-bold"
+                             style="font-size:24px;">
+                            CÔNG TY ABC
+                        </div>
+
+                        <div class="small opacity-75 text-uppercase">
+                            Phiếu thanh toán lương
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="text-end">
+
+                        <div class="small opacity-75">
+                            Tháng / Năm
+                        </div>
+
+                        <div class="fw-bold"
+                             style="font-size:28px; line-height:1;">
+
+                            @Model.Thang/@Model.Nam
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EMPLOYEE -->
+            <div class="p-4 border-bottom">
+
+                <div class="text-muted small mb-1">
+                    Nhân viên
+                </div>
+
+                <div class="fw-bold"
+                     style="font-size:20px; line-height:1.1;">
+
+                    @(Model.NhanVien != null ? Model.NhanVien.HotenNV : "")
+
+                </div>
+
+                <div class="text-secondary small mt-2">
+
+                    MaBL:@Model.MaBL
+                    •
+
+                    MaNV:@Model.MaNV
+                    •
+
+                    IDNhatKy:@Model.IDNhatKy
+                    •
+
+                    CreatedAt:@(Model.CreatedAt?.ToString("yyyy-MM-dd"))
+
+                </div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="p-4">
+
+                <!-- THU NHẬP -->
+                <div class="fw-bold text-secondary text-uppercase small mb-3"
+                     style="letter-spacing:1px;">
+
+                    Thu nhập
+
+                </div>
+
+                <!-- LƯƠNG -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+
+                        Lương cơ bản
+                        (@Model.SoNgayCong ngày ×
+                        @String.Format("{0:N0}", Model.Luong1NgayCong)đ)
+
+                    </div>
+
+                    <div class="salary-value">
+
+                        @String.Format("{0:N0}đ", Model.LuongCBan)
+
+                    </div>
+
+                </div>
+
+                <!-- TĂNG CA -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+
+                        Tăng ca:
+                        @(Model.SoGioTangCa ?? 0)h ×
+                        @String.Format("{0:N0}", Model.Luong1hTangCa)đ × 1.5
+
+                    </div>
+
+                    <div class="salary-plus">
+
+                        +@String.Format("{0:N0}đ", tangCa)
+
+                    </div>
+
+                </div>
+
+                <!-- THƯỞNG -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+                        Thưởng
+                    </div>
+
+                    <div class="salary-plus">
+
+                        +@String.Format("{0:N0}đ", Model.Thuong ?? 0)
+
+                    </div>
+
+                </div>
+
+                <!-- KHẤU TRỪ -->
+                <div class="fw-bold text-secondary text-uppercase small mt-4 mb-3"
+                     style="letter-spacing:1px;">
+
+                    Khấu trừ
+
+                </div>
+
+                <!-- BHYT -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+                        BHYT
+                    </div>
+
+                    <div class="salary-minus">
+
+                        -@String.Format("{0:N0}đ", Model.BHYT ?? 0)
+
+                    </div>
+
+                </div>
+
+                <!-- BHXH -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+                        BHXH
+                    </div>
+
+                    <div class="salary-minus">
+
+                        -@String.Format("{0:N0}đ", Model.BHXH ?? 0)
+
+                    </div>
+
+                </div>
+
+                <!-- THUẾ -->
+                <div class="salary-row">
+
+                    <div class="salary-label">
+                        Thuế (TNCN)
+                    </div>
+
+                    <div class="salary-minus">
+
+                        -@String.Format("{0:N0}đ", Model.Thue ?? 0)
+
+                    </div>
+
+                </div>
+
+                <!-- TOTAL -->
+                <div class="d-flex justify-content-between align-items-center total-box">
+
+                    <div class="fw-bold text-success"
+                         style="font-size:24px;">
+
+                        TỔNG THỰC LĨNH
+
+                    </div>
+
+                    <div class="fw-bold text-success"
+                         style="font-size:24px;">
+
+                        @String.Format("{0:N0}đ", Model.TongLuong)
+
+                    </div>
+
+                </div>
+
+                <!-- STATUS -->
+                <div class="mt-4">
+
+                    @if (Model.TrangThai == true)
+                    {
+                        <span class="status-paid">
+                            ● Đã trả
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status-pending">
+                            ● Chờ trả
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="modal-footer border-top px-4 py-3">
+
+        <button type="button"
+                class="btn btn-light border px-4"
+                data-bs-dismiss="modal">
+
+            Đóng
+
+        </button>
+
+        <button class="btn btn-dark px-4"
+                onclick="window.print()">
+
+            ↓ In phiếu
+
+        </button>
+
+    </div>
+
+</div>

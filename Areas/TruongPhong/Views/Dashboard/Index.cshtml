@@ -1,0 +1,543 @@
+﻿@model List<BTL.Models.PhieuLuong>
+
+@{
+    Layout = null;
+
+    var employees =
+        ViewBag.Employees as List<BTL.Models.NhanVien>;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #f3f4f6;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .flex-grow-1 {
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background: #0f172a;
+            color: #cbd5f5;
+            position: relative;
+            padding: 20px 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
+
+        .menu-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+            .menu-item:hover {
+                background: #1e293b;
+            }
+
+            .menu-item.active {
+                background: #2563eb;
+                color: white;
+            }
+
+        .sidebar-user {
+            position: absolute;
+            bottom: 20px;
+            left: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .bg-blue {
+            background: #3b82f6;
+        }
+
+        /* DASHBOARD */
+
+        .card-dashboard {
+            border: none;
+            border-left: 5px solid;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        }
+
+        .border-primary {
+            border-color: #4e73df !important;
+        }
+
+        .border-success {
+            border-color: #1cc88a !important;
+        }
+
+        .border-info {
+            border-color: #36b9cc !important;
+        }
+
+        .border-warning {
+            border-color: #f6c23e !important;
+        }
+
+        .chart-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        }
+
+        .table-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        }
+
+        .employee-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-flex">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="logo">
+                🏢 CompanyOS
+            </div>
+
+            <div class="menu-title">
+                TỔNG QUAN
+            </div>
+
+            <a href="@Url.Action("Index","Dashboard", new { area = "TruongPhong" })"
+               class="menu-item active text-decoration-none text-light">
+                📊 Dashboard
+            </a>
+
+            <div class="menu-title">
+                QUẢN LÝ
+            </div>
+
+            <a href="@Url.Action("Index","Account", new { area = "TruongPhong" })"
+               class="menu-item text-decoration-none text-light">
+                👤 Tài khoản
+            </a>
+
+            <a href="@Url.Action("Index","ChamCong", new { area = "NhanSu" })"
+               class="menu-item text-decoration-none text-light">
+                ⏱ Chấm công
+            </a>
+
+            <a href="@Url.Action("Index","Employee", new { area = "NhanSu" })"
+               class="menu-item text-decoration-none text-light">
+                📄 Nhân sự
+            </a>
+
+            <div class="menu-title">
+                TÀI CHÍNH
+            </div>
+
+            <a href="@Url.Action("Index","Payroll", new { area = "KeToan" })"
+               class="menu-item text-decoration-none text-light">
+                💰 Bảng lương
+            </a>
+
+            <a href="@Url.Action("Index","PayrollDetail", new { area = "KeToan" })"
+               class="menu-item text-decoration-none text-light">
+                📘 Nhật ký
+            </a>
+
+            <div class="menu-title">
+                HỆ THỐNG
+            </div>
+
+            <a href="@Url.Action("Index","Menu", new { area = "TruongPhong" })"
+               class="menu-item text-decoration-none text-light">
+                ⚙ Cấu hình
+            </a>
+
+            <!-- USER -->
+            <div class="sidebar-user">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="avatar bg-blue">
+                        @(ViewBag.HotenNV != null
+                            ? ViewBag.HotenNV.ToString().Substring(0,1)
+                            : "")
+                    </div>
+
+                    <div>
+
+                        <div class="text-white fw-semibold">
+                            @ViewBag.HotenNV
+                        </div>
+
+                        <small class="text-secondary">
+                            @ViewBag.TenCV
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <a href="@Url.Action("Logout","Dashboard",new { area = "TruongPhong" })")"
+                   class="d-block mt-2 text-decoration-none text-light">
+                    ← Đăng xuất
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- MAIN -->
+        <div class="flex-grow-1">
+
+            <div class="container-fluid p-4">
+
+                <!-- HEADER -->
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h2 class="mb-1">
+                            Dashboard thống kê & báo cáo
+                        </h2>
+
+                        <p class="text-muted mb-0">
+
+                            Xin chào,
+                            <strong>@ViewBag.HotenNV</strong>
+                            (@ViewBag.TenCV)
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- THỐNG KÊ -->
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="card card-dashboard border-primary">
+
+                            <div class="card-body">
+
+                                <h6>Tổng nhân viên</h6>
+
+                                <h3>
+                                    @ViewBag.TotalEmployee
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="card card-dashboard border-success">
+
+                            <div class="card-body">
+
+                                <h6>Đi làm hôm nay</h6>
+
+                                <h3>
+                                    @ViewBag.TodayWork
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="card card-dashboard border-info">
+
+                            <div class="card-body">
+
+                                <h6>Tổng quỹ lương</h6>
+
+                                <h3>
+                                    @String.Format("{0:N0}", ViewBag.TotalSalary) đ
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="card card-dashboard border-warning">
+
+                            <div class="card-body">
+
+                                <h6>Phiếu chờ duyệt</h6>
+
+                                <h3>
+                                    @ViewBag.PendingPayroll
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- CHART -->
+
+                <div class="row mt-4">
+
+                    <div class="col-md-8 mb-4">
+
+                        <div class="card chart-card">
+
+                            <div class="card-header">
+                                Nhân sự theo phòng ban
+                            </div>
+
+                            <div class="card-body">
+                                <div style="width:350px; height:350px; margin:auto;">
+                                    <canvas id="chartPB"></canvas>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NHÂN VIÊN -->
+
+                    <div class="col-md-4 mb-4">
+
+                        <div class="employee-box">
+
+                            <h5 class="mb-3">
+                                Nhân viên mới
+                            </h5>
+
+                            <table class="table table-hover">
+
+                                <thead class="table-light">
+
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Phòng ban</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @if (employees != null)
+                                    {
+                                        foreach (var emp in employees)
+                                        {
+                                    <tr>
+
+                                        <td>
+                                            @emp.MaNV
+                                        </td>
+
+                                        <td>
+                                            @emp.HotenNV
+                                        </td>
+
+                                        <td>
+                                            @(emp.PhongBan != null
+                                                        ? emp.PhongBan.TenPB
+                                                        : "")
+                                        </td>
+
+                                    </tr>
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- BẢNG LƯƠNG -->
+
+                <div class="table-box mt-2">
+
+                    <h5 class="mb-3">
+                        Danh sách bảng lương gần đây
+                    </h5>
+
+                    <table class="table table-bordered table-hover">
+
+                        <thead class="table-light">
+
+                            <tr>
+                                <th>Mã BL</th>
+                                <th>Nhân viên</th>
+                                <th>Ngày công</th>
+                                <th>Tăng ca</th>
+                                <th>Tổng lương</th>
+                                <th>Trạng thái</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+
+                                <td>
+                                    #@item.MaBL
+                                </td>
+
+                                <td>
+                                    @(item.NhanVien != null
+                                            ? item.NhanVien.HotenNV
+                                            : "")
+                                </td>
+
+                                <td>
+                                    @item.SoNgayCong
+                                </td>
+
+                                <td>
+                                    @item.SoGioTangCa giờ
+                                </td>
+
+                                <td>
+                                    @String.Format("{0:N0}", item.TongLuong) đ
+                                </td>
+
+                                <td>
+
+                                    @if (item.TrangThai == true)
+                                        {
+                                    <span class="badge bg-success">
+                                        Đã duyệt
+                                    </span>
+                                        }
+                                        else
+                                        {
+                                    <span class="badge bg-warning text-dark">
+                                        Chờ duyệt
+                                    </span>
+                                        }
+
+                                </td>
+
+                            </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const pbLabels = @Html.Raw(ViewBag.DepartmentLabels);
+
+        const pbData = @Html.Raw(ViewBag.DepartmentData);
+
+        new Chart(document.getElementById('chartPB'), {
+
+            type: 'pie',
+
+            data: {
+
+                labels: pbLabels,
+
+                datasets: [{
+                    data: pbData
+                }]
+
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

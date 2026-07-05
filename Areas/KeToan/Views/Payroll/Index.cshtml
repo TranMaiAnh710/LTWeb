@@ -1,0 +1,535 @@
+﻿@model IEnumerable<BTL.Models.PhieuLuong>
+
+@{
+    Layout = null;
+
+    decimal tongLuong = ViewBag.TongLuong ?? 0;
+    int daTra = ViewBag.DaTra ?? 0;
+    int choTra = ViewBag.ChoTra ?? 0;
+    decimal tongKhauTru = ViewBag.TongKhauTru ?? 0;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Bảng lương</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background: #f3f4f6;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #0f172a;
+            color: #cbd5f5;
+            height: 100vh;
+            padding: 20px 16px;
+            position: fixed;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            margin-top: 20px;
+            color: #64748b;
+        }
+
+        .menu-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+            .menu-item:hover {
+                background: #1e293b;
+            }
+
+            .menu-item.active {
+                background: #2563eb;
+                color: white;
+            }
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+        }
+
+        .header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .card-box {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            padding: 8px 12px;
+            background: white;
+        }
+
+            .search-box input {
+                border: none;
+                outline: none;
+                margin-left: 8px;
+                background: transparent;
+            }
+
+        .table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .sidebar-user {
+            position: absolute;
+            bottom: 20px;
+            left: 16px;
+            right: 16px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .badge-soft-success {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-soft-warning {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .btn-success {
+            background: #16a34a;
+            border: none;
+        }
+
+            .btn-success:hover {
+                background: #15803d;
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo">🏢 CompanyOS</div>
+
+            <div class="menu-title">TỔNG QUAN</div>
+            <a href="@Url.Action("Index","Dashboard", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">📊 Dashboard</a>
+
+            <div class="menu-title">QUẢN LÝ</div>
+            <a href="@Url.Action("Index","Account", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">👤 Tài khoản</a>
+            <a href="@Url.Action("Index","ChamCong", new { area = "NhanSu" })" class="menu-item text-decoration-none text-light">⏱ Chấm công</a>
+            <a href="@Url.Action("Index","Employee", new { area = "NhanSu" })" class="menu-item text-decoration-none text-light">📄 Nhân sự</a>
+
+            <div class="menu-title">TÀI CHÍNH</div>
+            <div class="menu-item active">💰 Bảng lương</div>
+            <a href="@Url.Action("Index","PayrollDetail", new { area = "KeToan" })" class="menu-item text-decoration-none text-light">📘 Nhật ký</a>
+
+            <div class="menu-title">HỆ THỐNG</div>
+            <a href="@Url.Action("Index","Menu", new { area = "TruongPhong" })" class="menu-item text-decoration-none text-light">⚙ Cấu hình</a>
+            <div class="sidebar-user">
+                <div class="d-flex align-items-center gap-2">
+
+                    <!-- Avatar -->
+                    <div class="avatar bg-blue">
+                        @(ViewBag.HotenNV != null ? ViewBag.HotenNV.Substring(0,1) : "")
+                    </div>
+
+                    <!-- Info -->
+                    <div>
+                        <div class="text-white fw-semibold">@ViewBag.HotenNV</div>
+                        <small class="text-secondary">@ViewBag.TenCV</small>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <a href="@Url.Action("Logout","Account")"
+                   class="d-block mt-2 text-decoration-none text-light">
+                    ← Đăng xuất
+                </a>
+            </div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- HEADER -->
+            <div class="header">
+
+                <h5 class="mb-0 fw-semibold text-dark">
+                    Quản lý Phiếu Lương
+                </h5>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <!-- SUMMARY -->
+                <div class="row g-4 mb-4">
+
+                    <div class="col-md-3">
+                        <div class="card-box h-100">
+                            <div class="text-muted small mb-2">
+                                TỔNG LƯƠNG
+                            </div>
+
+                            <h3 class="fw-bold">
+                                @String.Format("{0:N0}", tongLuong) đ
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-box h-100">
+                            <div class="text-muted small mb-2">
+                                ĐÃ TRẢ
+                            </div>
+
+                            <h3 class="fw-bold">
+                                @daTra phiếu
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-box h-100">
+                            <div class="text-muted small mb-2">
+                                CHỜ TRẢ
+                            </div>
+
+                            <h3 class="fw-bold">
+                                @choTra phiếu
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-box h-100">
+                            <div class="text-muted small mb-2">
+                                TỔNG KHẤU TRỪ
+                            </div>
+
+                            <h3 class="fw-bold text-danger">
+                                @String.Format("{0:N0}", tongKhauTru) đ
+                            </h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- FILTER -->
+                <div class="card-box mb-4">
+
+                    <form method="get">
+
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+
+                            <!-- THÁNG -->
+                            <select name="thang" class="form-select w-auto">
+
+                                <option value=""> Tháng </option>
+
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i"
+                                            @(Request["thang"] == i.ToString() ? "selected" : "")>
+                                        Tháng @i
+                                    </option>
+                                }
+
+                            </select>
+
+                            <!-- NĂM -->
+                            <select name="nam" class="form-select w-auto">
+
+                                <option value=""> Năm </option>
+
+                                @for (int i = 2024; i <= 2030; i++)
+                                {
+                                    <option value="@i"
+                                            @(Request["nam"] == i.ToString() ? "selected" : "")>
+                                        @i
+                                    </option>
+                                }
+
+                            </select>
+
+                            <!-- SEARCH -->
+                            <div class="search-box">
+
+                                🔍
+
+                                <input type="text"
+                                       name="search"
+                                       value="@Request["search"]"
+                                       placeholder="Tìm nhân viên..." />
+
+                            </div>
+
+                            <button class="btn btn-primary">
+                                Lọc
+                            </button>
+
+                            <a href="@Url.Action("ExportExcel","Payroll", new { area = "KeToan",search = Request["search"],thang = Request["thang"],nam = Request["nam"]})"
+                               class="btn btn-success">
+
+                                ⬇ Xuất Excel
+
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <!-- TABLE -->
+                <div class="card-box p-0 overflow-hidden">
+
+                    <div class="table-responsive">
+
+                        <table class="table align-middle mb-0">
+
+                            <thead class="bg-light">
+                                <tr class="text-muted small text-uppercase">
+                                    <th class="ps-4">MãBL</th>
+                                    <th>Nhân viên</th>
+                                    <th>Tháng</th>
+                                    <th>Ngày công</th>
+                                    <th>Tăng ca</th>
+                                    <th>Lương CB</th>
+                                    <th>Thưởng</th>
+                                    <th>Phạt</th>
+                                    <th>BHYT</th>
+                                    <th>BHXH</th>
+                                    <th>Thuế</th>
+                                    <th>Tổng</th>
+                                    <th>TT</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td class="ps-4 fw-medium">
+                                            #@item.MaBL
+                                        </td>
+
+                                        <!-- NHÂN VIÊN -->
+                                        <td>
+
+                                            <div class="d-flex align-items-center gap-3">
+
+                                                <div class="avatar">
+                                                    @(item.NhanVien != null &&
+                                                  !string.IsNullOrEmpty(item.NhanVien.HotenNV)
+                                                    ? item.NhanVien.HotenNV.Substring(0, 1)
+                                                    : "N")
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="fw-semibold">
+                                                        @(item.NhanVien?.HotenNV ?? "")
+                                                    </div>
+
+                                                    <div class="text-muted small">
+
+                                                        @(item.NhanVien?.ChucVu?.TenCV ?? "")
+                                                        -
+
+                                                        @(item.NhanVien?.PhongBan?.TenPB ?? "")
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            @item.Thang/@item.Nam
+                                        </td>
+
+                                        <td>
+                                            @item.SoNgayCong
+                                        </td>
+
+                                        <td>
+                                            @item.SoGioTangCa h
+                                        </td>
+
+                                        <td class="fw-medium">
+                                            @String.Format("{0:N0}", item.LuongCBan)
+                                        </td>
+
+                                        <td class="text-success fw-medium">
+                                            +@String.Format("{0:N0}", item.Thuong ?? 0)
+                                        </td>
+
+                                        <td class="text-danger fw-medium">
+                                            -@String.Format("{0:N0}", item.Phat ?? 0)
+                                        </td>
+
+                                        <td class="text-danger fw-medium">
+                                            -@String.Format("{0:N0}", item.BHYT ?? 0)
+                                        </td>
+
+                                        <td class="text-danger fw-medium">
+                                            -@String.Format("{0:N0}", item.BHXH ?? 0)
+                                        </td>
+
+                                        <td class="text-danger fw-medium">
+                                            -@String.Format("{0:N0}", item.Thue ?? 0)
+                                        </td>
+
+                                        <td class="fw-bold text-success">
+                                            @String.Format("{0:N0}", item.TongLuong)
+                                        </td>
+
+                                        <td>
+
+                                            @if (item.TrangThai == true)
+                                            {
+                                                <span class="badge-soft-success">
+                                                    ● Đã trả
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge-soft-warning">
+                                                    ● Chờ trả
+                                                </span>
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="d-flex align-items-center gap-2">
+
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-dark"
+                                                        onclick="showPayroll(@item.MaBL)">
+                                                    Phiếu
+                                                </button>
+
+                                                <span class="text-muted">|</span>
+
+                                                @if (item.TrangThai != true)
+                                                {
+                                                    <a href="@Url.Action("Duyet", "Payroll", new { area = "KeToan", id = item.MaBL })"
+                                                       class="text-decoration-none small fw-semibold text-success">
+                                                        Duyệt
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="small text-success fw-semibold">
+                                                        Đã duyệt
+                                                    </span>
+                                                }
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal fade" id="payrollModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" id="payrollContent">
+
+                <div class="p-5 text-center">
+                    Đang tải...
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showPayroll(id) {
+
+            fetch('/KeToan/Payroll/Detail?id=' + id)
+                .then(res => res.text())
+                .then(html => {
+
+                    document.getElementById("payrollContent").innerHTML = html;
+
+                    const modal = new bootstrap.Modal(
+                        document.getElementById('payrollModal')
+                    );
+
+                    modal.show();
+                });
+        }
+    </script>
+</body>
+</html>
