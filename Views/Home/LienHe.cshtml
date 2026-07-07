@@ -1,0 +1,76 @@
+﻿@model BTL.Models.LienHe
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+    ViewBag.Title = "Liên hệ";
+}
+
+<section class="pub-hero" style="padding:60px 0 70px">
+    <div class="pub-container">
+        <h1 style="font-size:36px">Liên hệ với chúng tôi</h1>
+        <p>Chúng tôi luôn sẵn sàng lắng nghe và đồng hành cùng bạn.</p>
+    </div>
+</section>
+
+<section class="pub-section">
+    <div class="pub-container">
+        <div class="pub-contact-grid">
+            <div class="pub-contact-info">
+                <h2 style="margin-top:0">Thông tin liên hệ</h2>
+                <div>
+                    <strong>📍 Trụ sở chính</strong>
+                    <span>Tầng 5, Toà nhà CompanyOS, Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</span>
+                </div>
+                <div>
+                    <strong>📞 Hotline</strong>
+                    <span>1900 1234 (8h - 18h hàng ngày)</span>
+                </div>
+                <div>
+                    <strong>✉ Email</strong>
+                    <span>hr@companyos.vn</span>
+                </div>
+                <div>
+                    <strong>🕐 Giờ làm việc</strong>
+                    <span>Thứ 2 - Thứ 6: 8h00 - 17h30<br />Thứ 7: 8h00 - 12h00</span>
+                </div>
+                <div>
+                    <strong>🌐 Website</strong>
+                    <span>www.companyos.vn</span>
+                </div>
+            </div>
+
+            <div class="pub-form">
+                <h2 style="margin-top:0">Gửi lời nhắn cho chúng tôi</h2>
+                @if (TempData["Success"] != null)
+                {
+                    <div class="pub-alert pub-alert-success">@TempData["Success"]</div>
+                }
+                @using (Html.BeginForm("LienHe", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <label>Họ tên *</label>
+                    @Html.TextBoxFor(m => m.HoTen)
+                    @Html.ValidationMessageFor(m => m.HoTen, null, new { @class = "field-error" })
+
+                    <label>Email *</label>
+                    @Html.TextBoxFor(m => m.Email, new { type = "email" })
+                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "field-error" })
+
+                    <label>Số điện thoại</label>
+                    @Html.TextBoxFor(m => m.SoDienThoai)
+
+                    <label>Tiêu đề *</label>
+                    @Html.TextBoxFor(m => m.TieuDe)
+                    @Html.ValidationMessageFor(m => m.TieuDe, null, new { @class = "field-error" })
+
+                    <label>Nội dung *</label>
+                    @Html.TextAreaFor(m => m.NoiDung)
+                    @Html.ValidationMessageFor(m => m.NoiDung, null, new { @class = "field-error" })
+
+                    <div style="margin-top:20px">
+                        <button type="submit" class="pub-btn pub-btn-primary">Gửi liên hệ</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,10 @@
+﻿@{ ViewBag.Title = "Báo cáo - Thống kê"; }
+<h2 style="margin-top:0">Báo cáo &amp; thống kê</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px">
+    <a href="@Url.Action("NhanVien")" style="text-decoration:none;background:#fff;padding:24px;border-radius:10px;border:1px solid #e5e7eb;color:#0f172a">
+        <div style="font-size:24px">👥</div><h3 style="margin:8px 0 4px">Báo cáo nhân viên</h3><p style="color:#64748b;margin:0">Thống kê theo phòng ban, chức vụ.</p></a>
+    <a href="@Url.Action("HopDong")" style="text-decoration:none;background:#fff;padding:24px;border-radius:10px;border:1px solid #e5e7eb;color:#0f172a">
+        <div style="font-size:24px">📄</div><h3 style="margin:8px 0 4px">Báo cáo hợp đồng</h3><p style="color:#64748b;margin:0">Thống kê theo loại và trạng thái.</p></a>
+    <a href="@Url.Action("ChamCong")" style="text-decoration:none;background:#fff;padding:24px;border-radius:10px;border:1px solid #e5e7eb;color:#0f172a">
+        <div style="font-size:24px">⏱</div><h3 style="margin:8px 0 4px">Báo cáo chấm công</h3><p style="color:#64748b;margin:0">Số ngày công theo tháng.</p></a>
+</div>

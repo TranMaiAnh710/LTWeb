@@ -1,0 +1,17 @@
+﻿@{ ViewBag.Title = "Báo cáo nhân viên"; }
+<h2 style="margin-top:0">Báo cáo nhân viên</h2>
+<p style="color:#64748b">Tổng số nhân viên: <strong style="color:#1e40af;font-size:20px">@ViewBag.Tong</strong></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <h3 style="margin-top:0">Theo phòng ban</h3>
+        <table style="width:100%;border-collapse:collapse"><tbody>
+            @foreach (dynamic r in ViewBag.TheoPhongBan) { <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:8px">@r.TenPB</td><td style="padding:8px;text-align:right"><strong>@r.SoLuong</strong></td></tr> }
+        </tbody></table>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <h3 style="margin-top:0">Theo chức vụ</h3>
+        <table style="width:100%;border-collapse:collapse"><tbody>
+            @foreach (dynamic r in ViewBag.TheoChucVu) { <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:8px">@r.TenCV</td><td style="padding:8px;text-align:right"><strong>@r.SoLuong</strong></td></tr> }
+        </tbody></table>
+    </div>
+</div>

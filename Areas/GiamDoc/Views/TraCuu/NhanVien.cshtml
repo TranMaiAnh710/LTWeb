@@ -1,0 +1,43 @@
+﻿@model System.Collections.Generic.List<BTL.Models.NhanVien>
+@{
+    ViewBag.Title = "Tra cứu nhân viên";
+    string keyword = ViewBag.Keyword as string;
+}
+<h2 style="margin-top:0">Tra cứu nhân viên</h2>
+
+<form method="get" style="margin-bottom:16px">
+    <input type="text" name="keyword" value="@keyword" placeholder="Nhập họ tên..." style="padding:8px;width:280px;border:1px solid #d1d5db;border-radius:6px" />
+    <button type="submit" style="padding:8px 16px;background:#2563eb;color:#fff;border:none;border-radius:6px">Tìm kiếm</button>
+</form>
+
+<table style="width:100%;background:#fff;border-collapse:collapse;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)">
+    <thead style="background:#f1f5f9">
+        <tr>
+            <th style="padding:12px;text-align:left">Mã NV</th>
+            <th style="padding:12px;text-align:left">Họ tên</th>
+            <th style="padding:12px;text-align:left">Ngày sinh</th>
+            <th style="padding:12px;text-align:left">Giới tính</th>
+            <th style="padding:12px;text-align:left">Phòng ban</th>
+            <th style="padding:12px;text-align:left">Chức vụ</th>
+            <th style="padding:12px;text-align:left">Lương CB</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nv in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px">@nv.MaNV</td>
+                <td style="padding:10px 12px"><strong>@nv.HotenNV</strong></td>
+                <td style="padding:10px 12px">@nv.NgaySinh.ToString("dd/MM/yyyy")</td>
+                <td style="padding:10px 12px">@nv.GioiTinh</td>
+                <td style="padding:10px 12px">@(nv.PhongBan?.TenPB)</td>
+                <td style="padding:10px 12px">@(nv.ChucVu?.TenCV)</td>
+                <td style="padding:10px 12px">@nv.LuongCBan.ToString("N0")</td>
+            </tr>
+        }
+        @if (Model.Count == 0)
+        {
+            <tr><td colspan="7" style="padding:20px;text-align:center;color:#94a3b8">Không có dữ liệu</td></tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+﻿@{ ViewBag.Title = "Đổi mật khẩu"; }
+<h2 style="margin-top:0">Đổi mật khẩu</h2>
+<div style="background:#fff;padding:32px;border-radius:10px;max-width:450px">
+    @if (ViewBag.Success != null) { <div style="padding:12px;background:#dcfce7;color:#166534;border-radius:6px;margin-bottom:16px">@ViewBag.Success</div> }
+    @if (ViewBag.Error != null) { <div style="padding:12px;background:#fee2e2;color:#991b1b;border-radius:6px;margin-bottom:16px">@ViewBag.Error</div> }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <label style="display:block;font-weight:600;margin:8px 0 6px">Mật khẩu cũ</label>
+        <input type="password" name="oldPassword" style="width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" required />
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Mật khẩu mới</label>
+        <input type="password" name="newPassword" style="width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" required />
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Xác nhận mật khẩu mới</label>
+        <input type="password" name="confirmPassword" style="width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" required />
+        <div style="margin-top:20px"><button type="submit" style="padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:6px;width:100%">Cập nhật mật khẩu</button></div>
+    }
+</div>

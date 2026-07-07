@@ -1,0 +1,17 @@
+﻿@model System.Collections.Generic.List<BTL.Models.ChucVu>
+@{ ViewBag.Title = "Tra cứu chức vụ"; }
+<h2 style="margin-top:0">Tra cứu chức vụ</h2>
+<table style="width:100%;background:#fff;border-collapse:collapse;border-radius:8px;overflow:hidden">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Mã CV</th><th style="padding:12px;text-align:left">Tên chức vụ</th><th style="padding:12px;text-align:left">Phụ cấp</th><th style="padding:12px;text-align:left">Số nhân viên</th></tr></thead>
+    <tbody>
+        @foreach (var cv in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px">@cv.MaCV</td>
+                <td style="padding:10px 12px"><strong>@cv.TenCV</strong></td>
+                <td style="padding:10px 12px">@cv.PhuCapCV.ToString("N0")</td>
+                <td style="padding:10px 12px">@cv.NhanViens.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

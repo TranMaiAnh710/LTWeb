@@ -1,0 +1,24 @@
+﻿@model BTL.Models.CaLamViec
+@{ ViewBag.Title = "Thêm ca làm việc"; }
+<h2 style="margin-top:0">Thêm ca làm việc</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:500px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <label style="display:block;font-weight:600;margin:8px 0 6px">Tên ca</label>
+        @Html.TextBoxFor(m => m.TenCa, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Giờ bắt đầu</label>
+        <input type="time" name="GioBatDau" value="08:00" style="width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" required />
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Giờ kết thúc</label>
+        <input type="time" name="GioKetThuc" value="17:00" style="width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" required />
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Ghi chú</label>
+        @Html.TextBoxFor(m => m.GhiChu, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+        <label style="display:block;margin:12px 0 6px">
+            @Html.CheckBoxFor(m => m.TrangThai) <strong>Đang sử dụng</strong>
+        </label>
+        <div style="margin-top:16px">
+            <button type="submit" style="padding:8px 20px;background:#2563eb;color:#fff;border:none;border-radius:6px">Lưu</button>
+            <a href="@Url.Action("Index")" style="margin-left:8px">Hủy</a>
+        </div>
+    }
+</div>

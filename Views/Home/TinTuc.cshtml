@@ -1,0 +1,52 @@
+﻿@model System.Collections.Generic.List<BTL.Models.TinTuc>
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+    ViewBag.Title = "Tin tức & sự kiện";
+    string loai = ViewBag.Loai as string;
+}
+
+<section class="pub-hero" style="padding:60px 0 70px">
+    <div class="pub-container">
+        <h1 style="font-size:36px">Tin tức &amp; sự kiện</h1>
+        <p>Cập nhật thông tin mới nhất từ CompanyOS.</p>
+    </div>
+</section>
+
+<section class="pub-section">
+    <div class="pub-container">
+        <div style="display:flex;gap:10px;justify-content:center;margin-bottom:30px;flex-wrap:wrap">
+            <a class="pub-btn @(loai==null?"pub-btn-primary":"pub-btn-outline")" href="@Url.Action("TinTuc")">Tất cả</a>
+            <a class="pub-btn @(loai=="TinTuc"?"pub-btn-primary":"pub-btn-outline")" href="@Url.Action("TinTuc",new{loai="TinTuc"})">Tin tức</a>
+            <a class="pub-btn @(loai=="SuKien"?"pub-btn-primary":"pub-btn-outline")" href="@Url.Action("TinTuc",new{loai="SuKien"})">Sự kiện</a>
+            <a class="pub-btn @(loai=="ThongBao"?"pub-btn-primary":"pub-btn-outline")" href="@Url.Action("TinTuc",new{loai="ThongBao"})">Thông báo</a>
+        </div>
+
+        @if (Model == null || Model.Count == 0)
+        {
+            <p style="text-align:center;color:#64748b">Chưa có bài viết nào.</p>
+        }
+        else
+        {
+            <div class="pub-grid pub-grid-3">
+                @foreach (var t in Model)
+                {
+                    var cls = t.LoaiTin == "SuKien" ? "sk" : t.LoaiTin == "ThongBao" ? "tb" : "";
+                    var label = t.LoaiTin == "SuKien" ? "SỰ KIỆN" : t.LoaiTin == "ThongBao" ? "THÔNG BÁO" : "TIN TỨC";
+                    <div class="pub-card">
+                        <div class="pub-card-img">@(t.LoaiTin == "SuKien" ? "🎉" : t.LoaiTin == "ThongBao" ? "📢" : "📰")</div>
+                        <div class="pub-card-body">
+                            <span class="pub-card-tag @cls">@label</span>
+                            <h3>@t.TieuDe</h3>
+                            <p>@t.TomTat</p>
+                            <div class="pub-card-meta">
+                                <span>@t.NgayDang.ToString("dd/MM/yyyy")</span>
+                                <span>@t.TacGia</span>
+                            </div>
+                            <a class="read" href="@Url.Action("ChiTiet",new{id=t.MaTin})">Xem chi tiết →</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

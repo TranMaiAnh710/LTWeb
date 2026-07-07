@@ -1,0 +1,26 @@
+﻿@model System.Collections.Generic.List<BTL.Models.CaLamViec>
+@{ ViewBag.Title = "Quản lý ca làm việc"; }
+<div style="display:flex;justify-content:space-between;align-items:center">
+    <h2 style="margin:0">Quản lý ca làm việc</h2>
+    <a href="@Url.Action("Create")" style="padding:8px 16px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px">+ Thêm ca</a>
+</div>
+<table style="width:100%;background:#fff;border-collapse:collapse;margin-top:16px;border-radius:8px;overflow:hidden">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Mã ca</th><th style="padding:12px;text-align:left">Tên ca</th><th style="padding:12px;text-align:center">Bắt đầu</th><th style="padding:12px;text-align:center">Kết thúc</th><th style="padding:12px;text-align:left">Ghi chú</th><th style="padding:12px;text-align:center">Trạng thái</th><th style="padding:12px;text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px">@c.MaCa</td>
+                <td style="padding:10px 12px"><strong>@c.TenCa</strong></td>
+                <td style="padding:10px 12px;text-align:center">@c.GioBatDau.ToString(@"hh\:mm")</td>
+                <td style="padding:10px 12px;text-align:center">@c.GioKetThuc.ToString(@"hh\:mm")</td>
+                <td style="padding:10px 12px">@c.GhiChu</td>
+                <td style="padding:10px 12px;text-align:center">@(c.TrangThai ? "Đang dùng" : "Ngưng")</td>
+                <td style="padding:10px 12px;text-align:right">
+                    <a href="@Url.Action("Edit",new{id=c.MaCa})" style="color:#2563eb;margin-right:12px">Sửa</a>
+                    <a href="@Url.Action("Delete",new{id=c.MaCa})" onclick="return confirm('Xóa ca này?')" style="color:#dc2626">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

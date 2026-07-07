@@ -1,0 +1,16 @@
+﻿@model BTL.Models.PhongBan
+@{ ViewBag.Title = "Thêm phòng ban"; }
+<h2 style="margin-top:0">Thêm phòng ban</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:500px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <label style="display:block;font-weight:600;margin-bottom:6px">Tên phòng ban</label>
+        @Html.TextBoxFor(m => m.TenPB, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+        @Html.ValidationMessageFor(m => m.TenPB, null, new { style = "color:#dc2626;font-size:12px" })
+        <div style="margin-top:16px">
+            <button type="submit" style="padding:8px 20px;background:#2563eb;color:#fff;border:none;border-radius:6px">Lưu</button>
+            <a href="@Url.Action("Index")" style="margin-left:8px">Hủy</a>
+        </div>
+    }
+</div>

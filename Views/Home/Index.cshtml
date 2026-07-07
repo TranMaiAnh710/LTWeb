@@ -1,0 +1,137 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+    ViewBag.Title = "Trang chủ";
+    var noiBat = ViewBag.NoiBat as System.Collections.Generic.List<BTL.Models.TinTuc>;
+    var tinMoi = ViewBag.TinMoi as System.Collections.Generic.List<BTL.Models.TinTuc>;
+}
+
+<section class="pub-hero">
+    <div class="pub-container pub-hero-inner">
+        <span class="pub-hero-tag">CÔNG TY CÔNG NGHỆ - GIẢI PHÁP NHÂN SỰ</span>
+        <h1>CompanyOS — Xây dựng đội ngũ, kiến tạo tương lai</h1>
+        <p>Chúng tôi mang đến giải pháp quản lý nhân sự toàn diện: hồ sơ, hợp đồng, chấm công theo ca và báo cáo thống kê thời gian thực. Đồng hành cùng doanh nghiệp trên hành trình phát triển bền vững.</p>
+        <div class="pub-hero-actions">
+            <a class="pub-btn pub-btn-primary" href="@Url.Action("GioiThieu","Home")">Tìm hiểu thêm</a>
+            <a class="pub-btn pub-btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.5)" href="@Url.Action("LienHe","Home")">Liên hệ với chúng tôi</a>
+        </div>
+    </div>
+</section>
+
+<section class="pub-container">
+    <div class="pub-stats">
+        <div class="pub-stat"><div class="pub-stat-num">@ViewBag.SoNhanVien+</div><div class="pub-stat-label">Nhân viên</div></div>
+        <div class="pub-stat"><div class="pub-stat-num">@ViewBag.SoPhongBan</div><div class="pub-stat-label">Phòng ban</div></div>
+        <div class="pub-stat"><div class="pub-stat-num">@ViewBag.SoChucVu</div><div class="pub-stat-label">Chức vụ</div></div>
+        <div class="pub-stat"><div class="pub-stat-num">12+</div><div class="pub-stat-label">Năm kinh nghiệm</div></div>
+    </div>
+</section>
+
+@if (noiBat != null && noiBat.Count > 0)
+{
+    <section class="pub-section">
+        <div class="pub-container">
+            <div class="pub-section-head">
+                <h2>Tin tức nổi bật</h2>
+                <p>Cập nhật thông tin mới nhất về hoạt động và sự kiện của CompanyOS.</p>
+            </div>
+            <div class="pub-grid pub-grid-3">
+                @foreach (var t in noiBat)
+                {
+                    <div class="pub-card">
+                        <div class="pub-card-img">@(t.LoaiTin == "SuKien" ? "🎉" : t.LoaiTin == "ThongBao" ? "📢" : "📰")</div>
+                        <div class="pub-card-body">
+                            @{
+                                var cls = t.LoaiTin == "SuKien" ? "sk" : t.LoaiTin == "ThongBao" ? "tb" : "";
+                                var label = t.LoaiTin == "SuKien" ? "SỰ KIỆN" : t.LoaiTin == "ThongBao" ? "THÔNG BÁO" : "TIN TỨC";
+                            }
+                            <span class="pub-card-tag @cls">@label</span>
+                            <h3>@t.TieuDe</h3>
+                            <p>@t.TomTat</p>
+                            <div class="pub-card-meta">
+                                <span>@t.NgayDang.ToString("dd/MM/yyyy")</span>
+                                <span>@t.TacGia</span>
+                            </div>
+                            <a class="read" href="@Url.Action("ChiTiet","Home",new{id=t.MaTin})">Xem chi tiết →</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<section class="pub-section pub-section-alt">
+    <div class="pub-container">
+        <div class="pub-section-head">
+            <h2>Chức năng nổi bật của hệ thống</h2>
+            <p>CompanyOS cung cấp bộ công cụ hoàn chỉnh cho quản trị nhân sự chuyên nghiệp.</p>
+        </div>
+        <div class="pub-grid pub-grid-3">
+            <div class="pub-feature">
+                <div class="pub-feature-icon">👤</div>
+                <h4>Quản lý hồ sơ nhân viên</h4>
+                <p>Lưu trữ, cập nhật toàn bộ thông tin nhân sự tập trung, dễ tra cứu, dễ báo cáo.</p>
+            </div>
+            <div class="pub-feature">
+                <div class="pub-feature-icon">📄</div>
+                <h4>Quản lý hợp đồng</h4>
+                <p>Theo dõi vòng đời hợp đồng lao động: thử việc, xác định thời hạn, không thời hạn.</p>
+            </div>
+            <div class="pub-feature">
+                <div class="pub-feature-icon">⏱</div>
+                <h4>Chấm công theo ca</h4>
+                <p>Ca sáng, chiều, tối, hành chính — linh hoạt và chính xác đến từng phút.</p>
+            </div>
+            <div class="pub-feature">
+                <div class="pub-feature-icon">🏢</div>
+                <h4>Phòng ban &amp; chức vụ</h4>
+                <p>Quản lý cơ cấu tổ chức, phân quyền theo vai trò, phù hợp với mọi mô hình.</p>
+            </div>
+            <div class="pub-feature">
+                <div class="pub-feature-icon">🔍</div>
+                <h4>Tra cứu &amp; tìm kiếm</h4>
+                <p>Tìm kiếm nhân viên, hồ sơ, hợp đồng nhanh chóng với bộ lọc thông minh.</p>
+            </div>
+            <div class="pub-feature">
+                <div class="pub-feature-icon">📊</div>
+                <h4>Báo cáo &amp; thống kê</h4>
+                <p>Báo cáo trực quan về nhân viên, hợp đồng, chấm công phục vụ ra quyết định.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (tinMoi != null && tinMoi.Count > 0)
+{
+    <section class="pub-section">
+        <div class="pub-container">
+            <div class="pub-section-head">
+                <h2>Tin tức &amp; sự kiện mới nhất</h2>
+                <p>Theo dõi những hoạt động, cột mốc và cơ hội mới từ CompanyOS.</p>
+            </div>
+            <div class="pub-grid pub-grid-3">
+                @foreach (var t in tinMoi)
+                {
+                    var cls2 = t.LoaiTin == "SuKien" ? "sk" : t.LoaiTin == "ThongBao" ? "tb" : "";
+                    var label2 = t.LoaiTin == "SuKien" ? "SỰ KIỆN" : t.LoaiTin == "ThongBao" ? "THÔNG BÁO" : "TIN TỨC";
+                    <div class="pub-card">
+                        <div class="pub-card-img">@(t.LoaiTin == "SuKien" ? "🎉" : t.LoaiTin == "ThongBao" ? "📢" : "📰")</div>
+                        <div class="pub-card-body">
+                            <span class="pub-card-tag @cls2">@label2</span>
+                            <h3>@t.TieuDe</h3>
+                            <p>@t.TomTat</p>
+                            <div class="pub-card-meta">
+                                <span>@t.NgayDang.ToString("dd/MM/yyyy")</span>
+                                <span>@t.TacGia</span>
+                            </div>
+                            <a class="read" href="@Url.Action("ChiTiet","Home",new{id=t.MaTin})">Xem chi tiết →</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="text-align:center;margin-top:30px">
+                <a class="pub-btn pub-btn-outline" href="@Url.Action("TinTuc","Home")">Xem tất cả tin tức</a>
+            </div>
+        </div>
+    </section>
+}

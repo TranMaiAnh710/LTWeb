@@ -1,0 +1,26 @@
+﻿@model BTL.Models.TinTuc
+@{ ViewBag.Title = "Đăng tin"; }
+<h2 style="margin-top:0">Đăng tin tức / sự kiện</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:800px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <label style="display:block;font-weight:600;margin:8px 0 6px">Tiêu đề</label>
+        @Html.TextBoxFor(m => m.TieuDe, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div><label style="display:block;font-weight:600;margin:12px 0 6px">Loại</label>@Html.DropDownListFor(m => m.LoaiTin, new SelectList(new[] { "TinTuc", "SuKien", "ThongBao" }), new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })</div>
+            <div><label style="display:block;font-weight:600;margin:12px 0 6px">Tác giả</label>@Html.TextBoxFor(m => m.TacGia, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })</div>
+        </div>
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Tóm tắt</label>
+        @Html.TextAreaFor(m => m.TomTat, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px;min-height:60px" })
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Nội dung</label>
+        @Html.TextAreaFor(m => m.NoiDung, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px;min-height:200px" })
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Hình ảnh (URL)</label>
+        @Html.TextBoxFor(m => m.HinhAnh, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+        <label style="display:block;margin:12px 0 6px">@Html.CheckBoxFor(m => m.NoiBat) <strong>Đánh dấu nổi bật (hiển thị trang chủ)</strong></label>
+        <div style="margin-top:16px">
+            <button type="submit" style="padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:6px">Đăng tin</button>
+            <a href="@Url.Action("Index")" style="margin-left:8px">Hủy</a>
+        </div>
+    }
+</div>

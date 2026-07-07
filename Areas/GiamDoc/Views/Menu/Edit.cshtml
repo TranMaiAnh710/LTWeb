@@ -1,0 +1,23 @@
+﻿@model BTL.Models.Menu
+@{ ViewBag.Title = "Sửa Menu"; }
+<h2 style="margin-top:0">Sửa Menu</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:600px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.MenuID)
+        <label style="display:block;font-weight:600;margin:8px 0 6px">Tên menu</label>
+        @Html.TextBoxFor(m => m.MenuName, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Đường dẫn</label>
+        @Html.TextBoxFor(m => m.MenuLink, new { style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Thứ tự hiển thị</label>
+        @Html.TextBoxFor(m => m.MenuOrder, new { type = "number", style = "width:100%;padding:8px;border:1px solid #d1d5db;border-radius:6px" })
+
+        <div style="margin-top:16px">
+            <button type="submit" style="padding:8px 20px;background:#2563eb;color:#fff;border:none;border-radius:6px">Cập nhật</button>
+            <a href="@Url.Action("Index")" style="margin-left:8px">Hủy</a>
+        </div>
+    }
+</div>

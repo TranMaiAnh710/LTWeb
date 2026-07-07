@@ -34,6 +34,7 @@ namespace BTL.Controllers
                     case 4: return RedirectToAction("Index", "Dashboard", new { area = "KeToan" });
                     case 5: return RedirectToAction("Index", "Dashboard", new { area = "NhanSu" });
                     case 6: return RedirectToAction("Index", "Dashboard", new { area = "NhanVien" });
+                    case 7: return RedirectToAction("Index", "Dashboard", new { area = "GiamDoc" });
                 }
             }
 

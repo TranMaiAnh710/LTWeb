@@ -1,0 +1,23 @@
+﻿@model System.Collections.Generic.List<BTL.Models.LienHe>
+@{ ViewBag.Title = "Liên hệ khách hàng"; }
+<h2 style="margin-top:0">Danh sách liên hệ</h2>
+<table style="width:100%;background:#fff;border-collapse:collapse;margin-top:16px;border-radius:8px;overflow:hidden">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Họ tên</th><th style="padding:12px;text-align:left">Email</th><th style="padding:12px;text-align:left">SĐT</th><th style="padding:12px;text-align:left">Tiêu đề</th><th style="padding:12px;text-align:center">Ngày gửi</th><th style="padding:12px;text-align:center">Trạng thái</th><th style="padding:12px;text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+        @foreach (var lh in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb;background:@(lh.DaXuLy ? "#f8fafc" : "#fff")">
+                <td style="padding:10px 12px"><strong>@lh.HoTen</strong></td>
+                <td style="padding:10px 12px">@lh.Email</td>
+                <td style="padding:10px 12px">@lh.SoDienThoai</td>
+                <td style="padding:10px 12px">@lh.TieuDe<br /><small style="color:#94a3b8">@(lh.NoiDung.Length > 80 ? lh.NoiDung.Substring(0,80) + "..." : lh.NoiDung)</small></td>
+                <td style="padding:10px 12px;text-align:center">@lh.NgayGui.ToString("dd/MM HH:mm")</td>
+                <td style="padding:10px 12px;text-align:center">@(lh.DaXuLy ? "✅ Đã xử lý" : "⏳ Chờ")</td>
+                <td style="padding:10px 12px;text-align:right">
+                    @if (!lh.DaXuLy) { <a href="@Url.Action("XuLy",new{id=lh.MaLH})" style="color:#16a34a;margin-right:12px">Đã xử lý</a> }
+                    <a href="@Url.Action("Delete",new{id=lh.MaLH})" onclick="return confirm('Xóa?')" style="color:#dc2626">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model System.Collections.Generic.List<BTL.Models.HopDong>
+@{
+    ViewBag.Title = "Quản lý hợp đồng";
+    var nvs = ViewBag.NhanViens as System.Collections.Generic.Dictionary<int, string>;
+}
+<div style="display:flex;justify-content:space-between;align-items:center">
+    <h2 style="margin:0">Quản lý hợp đồng</h2>
+    <a href="@Url.Action("Create")" style="padding:8px 16px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px">+ Thêm hợp đồng</a>
+</div>
+<table style="width:100%;background:#fff;border-collapse:collapse;margin-top:16px;border-radius:8px;overflow:hidden;font-size:14px">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Số HĐ</th><th style="padding:12px;text-align:left">Nhân viên</th><th style="padding:12px;text-align:left">Loại</th><th style="padding:12px;text-align:left">Bắt đầu</th><th style="padding:12px;text-align:left">Kết thúc</th><th style="padding:12px;text-align:right">Lương</th><th style="padding:12px;text-align:center">Trạng thái</th><th style="padding:12px;text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+        @foreach (var hd in Model)
+        {
+            var tenNV = nvs != null && nvs.ContainsKey(hd.MaNV) ? nvs[hd.MaNV] : "(?)";
+            var color = hd.TrangThai == "HieuLuc" ? "#16a34a" : hd.TrangThai == "HetHan" ? "#dc2626" : "#f59e0b";
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px"><strong>@hd.SoHopDong</strong></td>
+                <td style="padding:10px 12px">@tenNV</td>
+                <td style="padding:10px 12px">@hd.LoaiHopDong</td>
+                <td style="padding:10px 12px">@hd.NgayBatDau.ToString("dd/MM/yyyy")</td>
+                <td style="padding:10px 12px">@(hd.NgayKetThuc.HasValue ? hd.NgayKetThuc.Value.ToString("dd/MM/yyyy") : "-")</td>
+                <td style="padding:10px 12px;text-align:right">@hd.LuongHopDong.ToString("N0")</td>
+                <td style="padding:10px 12px;text-align:center"><span style="padding:3px 10px;background:@color;color:#fff;border-radius:12px;font-size:12px">@hd.TrangThai</span></td>
+                <td style="padding:10px 12px;text-align:right">
+                    <a href="@Url.Action("Details",new{id=hd.MaHD})" style="color:#64748b;margin-right:8px">Xem</a>
+                    <a href="@Url.Action("Edit",new{id=hd.MaHD})" style="color:#2563eb;margin-right:8px">Sửa</a>
+                    <a href="@Url.Action("Delete",new{id=hd.MaHD})" onclick="return confirm('Xóa?')" style="color:#dc2626">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

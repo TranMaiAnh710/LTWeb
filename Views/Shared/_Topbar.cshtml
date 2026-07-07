@@ -1,14 +1,12 @@
-﻿
-
+﻿@{
+    var userName = Session["UserName"] as string ?? "User";
+    var vnCulture = new System.Globalization.CultureInfo("vi-VN");
+}
 <div class="topbar">
-
-    <div class="title">
-        Dashboard
-    </div>
-
+    <div class="title">@ViewBag.Title</div>
     <div class="right">
-        <span>Th 4, 29/04/2026</span>
+        <span>@DateTime.Now.ToString("dddd, dd/MM/yyyy", vnCulture)</span>
+        <a href="/">Trang chủ</a>
         <a href="/Login/Logout">Đăng xuất</a>
     </div>
-
 </div>

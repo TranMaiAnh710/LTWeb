@@ -1,0 +1,18 @@
+﻿@model BTL.Models.HopDong
+@{ ViewBag.Title = "Chi tiết hợp đồng"; var nv = ViewBag.NhanVien as BTL.Models.NhanVien; }
+<h2 style="margin-top:0">Chi tiết hợp đồng: @Model.SoHopDong</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:800px;line-height:1.8">
+    <p><strong>Số hợp đồng:</strong> @Model.SoHopDong</p>
+    <p><strong>Nhân viên:</strong> @(nv?.HotenNV) — Mã NV: @Model.MaNV</p>
+    <p><strong>Loại hợp đồng:</strong> @Model.LoaiHopDong</p>
+    <p><strong>Ngày bắt đầu:</strong> @Model.NgayBatDau.ToString("dd/MM/yyyy") &nbsp; <strong>Ngày kết thúc:</strong> @(Model.NgayKetThuc.HasValue ? Model.NgayKetThuc.Value.ToString("dd/MM/yyyy") : "(Vô thời hạn)")</p>
+    <p><strong>Ngày ký:</strong> @Model.NgayKy.ToString("dd/MM/yyyy") — <strong>Người ký:</strong> @Model.NguoiKy</p>
+    <p><strong>Lương hợp đồng:</strong> @Model.LuongHopDong.ToString("N0") VND</p>
+    <p><strong>Trạng thái:</strong> @Model.TrangThai</p>
+    <p><strong>Nội dung:</strong></p>
+    <div style="background:#f8fafc;padding:16px;border-radius:6px;white-space:pre-wrap">@Model.NoiDung</div>
+    <div style="margin-top:20px">
+        <a href="@Url.Action("Edit",new{id=Model.MaHD})" style="padding:8px 16px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px">Sửa</a>
+        <a href="@Url.Action("Index")" style="margin-left:8px">Quay lại</a>
+    </div>
+</div>

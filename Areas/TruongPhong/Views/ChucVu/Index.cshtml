@@ -1,0 +1,25 @@
+﻿@model System.Collections.Generic.List<BTL.Models.ChucVu>
+@{ ViewBag.Title = "Quản lý chức vụ"; }
+<div style="display:flex;justify-content:space-between;align-items:center">
+    <h2 style="margin:0">Quản lý chức vụ</h2>
+    <a href="@Url.Action("Create")" style="padding:8px 16px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px">+ Thêm chức vụ</a>
+</div>
+@if (TempData["Error"] != null) { <div style="padding:12px;background:#fee2e2;color:#991b1b;border-radius:6px;margin:12px 0">@TempData["Error"]</div> }
+<table style="width:100%;background:#fff;border-collapse:collapse;margin-top:16px;border-radius:8px;overflow:hidden">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Mã CV</th><th style="padding:12px;text-align:left">Tên chức vụ</th><th style="padding:12px;text-align:right">Phụ cấp</th><th style="padding:12px;text-align:center">Số NV</th><th style="padding:12px;text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+        @foreach (var cv in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px">@cv.MaCV</td>
+                <td style="padding:10px 12px"><strong>@cv.TenCV</strong></td>
+                <td style="padding:10px 12px;text-align:right">@cv.PhuCapCV.ToString("N0")</td>
+                <td style="padding:10px 12px;text-align:center">@cv.NhanViens.Count</td>
+                <td style="padding:10px 12px;text-align:right">
+                    <a href="@Url.Action("Edit",new{id=cv.MaCV})" style="color:#2563eb;margin-right:12px">Sửa</a>
+                    <a href="@Url.Action("Delete",new{id=cv.MaCV})" onclick="return confirm('Xóa chức vụ này?')" style="color:#dc2626">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

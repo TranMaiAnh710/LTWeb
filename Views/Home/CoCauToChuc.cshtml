@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+    ViewBag.Title = "Cơ cấu tổ chức";
+    var phongBans = ViewBag.PhongBans as System.Collections.Generic.List<BTL.Models.PhongBan>;
+    var chucVus = ViewBag.ChucVus as System.Collections.Generic.List<BTL.Models.ChucVu>;
+}
+
+<section class="pub-hero" style="padding:60px 0 70px">
+    <div class="pub-container">
+        <h1 style="font-size:36px">Cơ cấu tổ chức</h1>
+        <p>Mô hình tổ chức tinh gọn – phân quyền rõ ràng – vận hành hiệu quả.</p>
+    </div>
+</section>
+
+<section class="pub-section">
+    <div class="pub-container">
+        <div class="pub-section-head">
+            <h2>Sơ đồ tổ chức</h2>
+            <p>Cấu trúc quản trị của CompanyOS.</p>
+        </div>
+
+        <div class="org-tree">
+            <div>
+                <div class="org-node top">HỘI ĐỒNG QUẢN TRỊ</div>
+            </div>
+            <div class="org-row">
+                <div class="org-node top">GIÁM ĐỐC ĐIỀU HÀNH</div>
+            </div>
+            <div class="org-row">
+                <div class="org-node">Trưởng phòng Nhân sự</div>
+                <div class="org-node">Trưởng phòng Kỹ thuật</div>
+                <div class="org-node">Trưởng phòng Kinh doanh</div>
+                <div class="org-node">Trưởng phòng Kế toán</div>
+            </div>
+            <div class="org-row">
+                <div class="org-node">Nhân viên Nhân sự</div>
+                <div class="org-node">Nhân viên Kỹ thuật</div>
+                <div class="org-node">Nhân viên Kinh doanh</div>
+                <div class="org-node">Nhân viên Kế toán</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pub-section pub-section-alt">
+    <div class="pub-container">
+        <div class="pub-section-head">
+            <h2>Các phòng ban</h2>
+            <p>Danh sách phòng ban đang hoạt động tại CompanyOS.</p>
+        </div>
+        <div class="pub-grid pub-grid-4">
+            @if (phongBans != null)
+            {
+                foreach (var pb in phongBans)
+                {
+                    <div class="pub-feature">
+                        <div class="pub-feature-icon">🏢</div>
+                        <h4>@pb.TenPB</h4>
+                        <p>Bộ phận trực thuộc CompanyOS.</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="pub-section">
+    <div class="pub-container">
+        <div class="pub-section-head">
+            <h2>Hệ thống chức vụ</h2>
+            <p>Các vị trí công việc trong tổ chức.</p>
+        </div>
+        <div class="pub-grid pub-grid-4">
+            @if (chucVus != null)
+            {
+                foreach (var cv in chucVus)
+                {
+                    <div class="pub-feature">
+                        <div class="pub-feature-icon">⭐</div>
+                        <h4>@cv.TenCV</h4>
+                        <p>Phụ cấp chức vụ: @cv.PhuCapCV.ToString("N0") VND</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

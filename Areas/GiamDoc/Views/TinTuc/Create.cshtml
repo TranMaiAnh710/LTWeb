@@ -1,0 +1,49 @@
+﻿@model BTL.Models.TinTuc
+@{ ViewBag.Title = "Đăng bài"; }
+<h2 style="margin-top:0">Đăng bài mới</h2>
+<div style="background:#fff;padding:24px;border-radius:8px;max-width:900px">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <label style="display:block;font-weight:600;margin:8px 0 6px">Tiêu đề bài viết *</label>
+        @Html.TextBoxFor(m => m.TieuDe, new { style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px;font-size:15px" })
+        @Html.ValidationMessageFor(m => m.TieuDe, null, new { style = "color:#dc2626;font-size:12px" })
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div>
+                <label style="display:block;font-weight:600;margin:12px 0 6px">Loại bài *</label>
+                @Html.DropDownListFor(m => m.LoaiTin, new SelectList(new[] {
+                    new { Value = "TinTuc",   Text = "Tin tức" },
+                    new { Value = "SuKien",   Text = "Sự kiện" },
+                    new { Value = "ThongBao", Text = "Thông báo" }
+                }, "Value", "Text"), new { style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" })
+            </div>
+            <div>
+                <label style="display:block;font-weight:600;margin:12px 0 6px">Tác giả</label>
+                @Html.TextBoxFor(m => m.TacGia, new { style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" })
+            </div>
+        </div>
+
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Tóm tắt (hiển thị trong danh sách)</label>
+        @Html.TextAreaFor(m => m.TomTat, new { style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px;min-height:60px", placeholder = "Mô tả ngắn gọn về bài viết..." })
+
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Nội dung chi tiết</label>
+        @Html.TextAreaFor(m => m.NoiDung, new { style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px;min-height:280px;font-family:inherit", placeholder = "Nội dung đầy đủ của bài viết. Xuống dòng để tạo đoạn mới." })
+
+        <label style="display:block;font-weight:600;margin:12px 0 6px">Hình ảnh (URL, không bắt buộc)</label>
+        @Html.TextBoxFor(m => m.HinhAnh, new { placeholder = "https://...", style = "width:100%;padding:10px;border:1px solid #d1d5db;border-radius:6px" })
+
+        <div style="margin-top:16px;padding:14px;background:#fef3c7;border-radius:6px">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:600;color:#92400e">
+                @Html.CheckBoxFor(m => m.NoiBat)
+                <span>⭐ Đánh dấu <strong>nổi bật</strong> — sẽ hiển thị ở khu vực "Tin tức nổi bật" trên trang chủ</span>
+            </label>
+        </div>
+
+        <div style="margin-top:20px">
+            <button type="submit" style="padding:12px 28px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-weight:600">📢 Đăng bài</button>
+            <a href="@Url.Action("Index")" style="margin-left:12px">Hủy</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,16 @@
+﻿@model System.Collections.Generic.List<BTL.Models.PhongBan>
+@{ ViewBag.Title = "Tra cứu phòng ban"; }
+<h2 style="margin-top:0">Tra cứu phòng ban</h2>
+<table style="width:100%;background:#fff;border-collapse:collapse;border-radius:8px;overflow:hidden">
+    <thead style="background:#f1f5f9"><tr><th style="padding:12px;text-align:left">Mã PB</th><th style="padding:12px;text-align:left">Tên phòng ban</th><th style="padding:12px;text-align:left">Số nhân viên</th></tr></thead>
+    <tbody>
+        @foreach (var pb in Model)
+        {
+            <tr style="border-top:1px solid #e5e7eb">
+                <td style="padding:10px 12px">@pb.MaPB</td>
+                <td style="padding:10px 12px"><strong>@pb.TenPB</strong></td>
+                <td style="padding:10px 12px">@pb.NhanViens.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

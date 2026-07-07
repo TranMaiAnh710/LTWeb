@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Dashboard Giám đốc";
+}
+<h2 style="margin-top:0">Dashboard Giám đốc</h2>
+<p style="color:#64748b">Tổng quan hệ thống nhân sự và hợp đồng.</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0">
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Nhân viên</div>
+        <div style="font-size:28px;font-weight:700;color:#1e40af">@ViewBag.SoNhanVien</div>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Phòng ban</div>
+        <div style="font-size:28px;font-weight:700;color:#1e40af">@ViewBag.SoPhongBan</div>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Chức vụ</div>
+        <div style="font-size:28px;font-weight:700;color:#1e40af">@ViewBag.SoChucVu</div>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Hợp đồng hiệu lực</div>
+        <div style="font-size:28px;font-weight:700;color:#059669">@ViewBag.SoHopDong</div>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Ca làm việc</div>
+        <div style="font-size:28px;font-weight:700;color:#0891b2">@ViewBag.SoCa</div>
+    </div>
+    <div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+        <div style="color:#64748b;font-size:13px">Liên hệ chờ xử lý</div>
+        <div style="font-size:28px;font-weight:700;color:#dc2626">@ViewBag.SoLienHe</div>
+    </div>
+</div>
+
+<div style="background:#fff;padding:20px;border-radius:10px;border:1px solid #e5e7eb">
+    <h3>Chức năng nhanh</h3>
+    <ul>
+        <li><a href="/GiamDoc/TraCuu/NhanVien">Tra cứu nhân sự</a></li>
+        <li><a href="/GiamDoc/TraCuu/PhongBan">Tra cứu phòng ban</a></li>
+        <li><a href="/GiamDoc/TraCuu/ChucVu">Tra cứu chức vụ</a></li>
+        <li><a href="/GiamDoc/BaoCao/NhanVien">Báo cáo nhân viên</a></li>
+        <li><a href="/GiamDoc/BaoCao/HopDong">Báo cáo hợp đồng</a></li>
+        <li><a href="/GiamDoc/BaoCao/ChamCong">Báo cáo chấm công</a></li>
+    </ul>
+</div>

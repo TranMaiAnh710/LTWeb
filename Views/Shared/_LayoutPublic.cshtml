@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+    var loggedIn = Session["UserID"] != null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - CompanyOS</title>
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/public.css" />
+</head>
+<body class="public">
+    <header class="pub-header">
+        <div class="pub-container pub-header-inner">
+            <a href="@Url.Action("Index","Home")" class="pub-logo">
+                <span class="pub-logo-mark">C</span>
+                <span class="pub-logo-text">CompanyOS</span>
+            </a>
+            <nav class="pub-nav">
+                <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                <a href="@Url.Action("GioiThieu","Home")">Giới thiệu</a>
+                <a href="@Url.Action("CoCauToChuc","Home")">Cơ cấu tổ chức</a>
+                <a href="@Url.Action("TinTuc","Home")">Tin tức &amp; Sự kiện</a>
+                <a href="@Url.Action("LienHe","Home")">Liên hệ</a>
+            </nav>
+            <div class="pub-header-actions">
+                @if (loggedIn)
+                {
+                    <a class="pub-btn pub-btn-ghost" href="/Login/Logout">Đăng xuất</a>
+                }
+                else
+                {
+                    <a class="pub-btn pub-btn-primary" href="/Login/LoginIndex">Đăng nhập</a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="pub-footer">
+        <div class="pub-container pub-footer-grid">
+            <div>
+                <h4>CompanyOS</h4>
+                <p>Hệ thống quản lý nhân sự nội bộ. Tinh gọn quy trình, tối ưu vận hành, nâng cao trải nghiệm nhân viên.</p>
+            </div>
+            <div>
+                <h4>Liên kết</h4>
+                <a href="@Url.Action("GioiThieu","Home")">Giới thiệu công ty</a>
+                <a href="@Url.Action("CoCauToChuc","Home")">Cơ cấu tổ chức</a>
+                <a href="@Url.Action("TinTuc","Home")">Tin tức</a>
+                <a href="@Url.Action("LienHe","Home")">Liên hệ</a>
+            </div>
+            <div>
+                <h4>Liên hệ</h4>
+                <p>Tầng 5, Toà nhà CompanyOS<br />Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
+                <p>Hotline: <strong>1900 1234</strong></p>
+                <p>Email: <strong>hr@companyos.vn</strong></p>
+            </div>
+        </div>
+        <div class="pub-copyright">© @DateTime.Now.Year CompanyOS. All rights reserved.</div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿@model BTL.Models.NhanVien
+@{ ViewBag.Title = "Hồ sơ cá nhân"; }
+<h2 style="margin-top:0">Hồ sơ cá nhân</h2>
+<div style="background:#fff;padding:32px;border-radius:10px;max-width:700px;line-height:1.9">
+    <h3 style="margin-top:0;color:#1e40af">@Model.HotenNV</h3>
+    <p>Mã nhân viên: <strong>#@Model.MaNV</strong></p>
+    <hr />
+    <p><strong>Ngày sinh:</strong> @Model.NgaySinh.ToString("dd/MM/yyyy")</p>
+    <p><strong>Giới tính:</strong> @Model.GioiTinh</p>
+    <p><strong>Số điện thoại:</strong> @Model.SĐT</p>
+    <p><strong>Phòng ban:</strong> @Model.PhongBan?.TenPB</p>
+    <p><strong>Chức vụ:</strong> @Model.ChucVu?.TenCV</p>
+    <p><strong>Lương cơ bản:</strong> @Model.LuongCBan.ToString("N0") VND</p>
+    <p><strong>Ngày vào công ty:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
+    <p><strong>Trạng thái:</strong> @((Model.TrangThai ?? false) ? "Đang làm việc" : "Nghỉ")</p>
+</div>
